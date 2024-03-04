@@ -39,4 +39,11 @@ Route::prefix('admin')->group(function () {
         Route::put('/updatelomba', [adminlinfolombacontroller::class, 'updatelomba'])->name('updateinfolomba');
         Route::delete('/deletelomba', [adminlinfolombacontroller::class, 'deletelomba'])->name('deletinfolomba');
     });
+
+    Route::get('/verifikasi/prestasi', function () {
+        return view('app.admin.verifprestasi');
+    })->name('verifprestasi');
+    Route::get('/verifikasi/keaktifan', function () {
+        return view('app.admin.verifkeaktifan');
+    })->name('verifkeaktifan');
 });

@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css?v=3.2.0">
     @stack('style')
-
-
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -34,7 +32,7 @@
 
             <ul class="navbar-nav ml-auto">
 
-                
+
 
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -90,66 +88,53 @@
                     </div>
                 </div>
 
-                <!-- <div class="form-inline">
-                    <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-sidebar">
-                                <i class="fas fa-search fa-fw"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div> -->
-
                 <nav class="mt-2">
                     <!-- admin -->
-                    
+
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('getsiswa')}}" class="nav-link @yield('aktifkelolasiswa')">
                                 <i class="nav-icon fas fa-user-cog"></i>
                                 <p>
                                     Kelola Siswa
                                 </p>
                             </a>
                         </li>
-
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-user-graduate"></i>
-                                <p>
-                                    Kelola Angkatan
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('getinfolomba')}}" class="nav-link @yield('aktifinfolomba')">
                                 <i class="nav-icon fas fa-photo-video"></i>
                                 <p>
                                     Informasi Lomba
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <li class="nav-item @yield('ismenu')">
+                                <a href="#" class="nav-link @yield('isverif')"> 
                                 <i class="nav-icon fas fa-check-square"></i>
-                                <p>
+                                    <p>
                                     Verifikasi Pengajuan
-                                </p>
-                            </a>
-                        </li>
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{route('verifprestasi')}}" class="nav-link @yield('isverifprestasi')">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Prestasi</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route('verifkeaktifan')}}" class="nav-link @yield('isverifkeaktifan')">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Keaktifan</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-medal"></i>
-                                <p>
-                                    Capaian Siswa
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('getusers')}}" class="nav-link @yield('aktifusers')">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     User

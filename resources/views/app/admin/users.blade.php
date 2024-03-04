@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Page Title')
+@section('aktifusers', 'active')
 
 @prepend('style')
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">

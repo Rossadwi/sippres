@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('title', 'Page Title')
-@section('aktifinfolomba', 'active')
+@section('ismenu', 'menu-open')
+@section('isverif', 'active')
+@section('isverifprestasi', 'active')
+
+
 
 @prepend('style')
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -36,46 +40,9 @@
             <div class="col-12">
                 <div class="card mt-3">
                     <div class="card-header">
-                        <h3 class="card-title">Data Info Lomba</h3>
+                        <h3 class="card-title">verif prestasi</h3>
                     </div>
 
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Nama Lomba</th>
-                                    <th>Penyelenggara</th>
-                                    <th>Deskripsi</th>
-                                    <th>Foto</th>
-                                    <th>Waktu</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach(json_decode($data) as $row)
-                                <tr>
-                                    <td>{{$row->id_infolomba}}</td>
-                                    <td>{{$row->nama_lomba}}</td>
-                                    <td>{{$row->penyelenggara}}</td>
-                                    <td>{{$row->deskripsi}}</td>
-                                    <td><img src="/poster/{{$row->foto}}" width="75" alt="$row->foto"></td>
-                                    <td>{{$row->waktu}}</td>
-                                    <td>
-                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('deletinfolomba') }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="id" value="{{ $row->id_infolomba }}">
-                                            <a data-id="{{ $row->id_infolomba }}" data-all="{{json_encode($row)}}" class="btn btn-sm btn-warning edit" data-toggle="modal" data-target="#modal-edit" style="color: white;"><i class="bi bi-pencil-square"></i>EDIT</a>
-                                            <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-
-                            </tbody>
-                        </table>
-                    </div>
 
                 </div>
 
@@ -98,39 +65,49 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form name="frm_add" id="frm_add" class="form-horizontal" action="{{ route('insertinfolomba') }}" method="POST" enctype="multipart/form-data">
+            <form name="frm_add" id="frm_add" class="form-horizontal" action="{{ route('insertsiswa') }}" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
-                        <label class="col-lg-4 control-label">Nama lomba</label>
+                        <label class="col-lg-2 control-label">Nama</label>
                         <div class="col-lg-12">
-                            <input type="text" name="nama_lomba" placeholder="nama lomba" class="form-control">
+                            <input type="text" name="nama_siswa" placeholder="nama" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Penyelenggara</label>
+                        <label class="col-lg-2 control-label">Nisn</label>
                         <div class="col-lg-12">
-                            <input type="text" name="penyelenggara" placeholder="penyelenggara" class="form-control">
+                            <input type="text" name="nisn" placeholder="nisn" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Deskripsi</label>
+                        <label class="col-lg-2 control-label">Jurusan</label>
                         <div class="col-lg-12">
-                            <input type="text" name="deskripsi" placeholder="deskripsi" class="form-control">
+                            <select class="form-control" name="jurusan">
+                                <option value="IPA">IPA</option>
+                                <option value="IPS">IPS</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Waktu</label>
+                        <label class="col-lg-2 control-label">Angkatan</label>
                         <div class="col-lg-12">
-                            <input type="Date" name="waktu" placeholder="waktu" class="form-control">
+                            <input type="text" name="angkatan" placeholder="angkatan" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Foto</label>
+                        <label class="col-lg-2 control-label">Telp</label>
+                        <div class="col-lg-12">
+                            <input type="text" name="telp" placeholder="telp" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">foto</label>
                         <div class="col-lg-10">
                             <input type="file" name="foto" />
                         </div>
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -149,40 +126,56 @@
                 <h4 class="modal-title">Edit Data</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
-            <form name="frm_edit" id="editform" class="form-horizontal" action="{{ route('updateinfolomba') }}" method="POST" enctype="multipart/form-data">
+            <form name="frm_edit" id="editform" class="form-horizontal" action="{{ route('updatesiswa') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
-                <div class="form-group">
-                        <label class="col-lg-4 control-label">Nama lomba</label>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Nama</label>
                         <div class="col-lg-12">
+
                             <input type="hidden" name="iddata" class="form-control" id="iddata">
-                            <input type="text" name="nama_lomba" placeholder="nama lomba" class="form-control" id="namalomba">
+                            <input type="text" name="name" placeholder="nama" class="form-control" id="nama">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Penyelenggara</label>
+                        <label class="col-lg-2 control-label">Nisn</label>
                         <div class="col-lg-12">
-                            <input type="text" name="penyelenggara" placeholder="penyelenggara" class="form-control" id="penyelenggara">
+                            <input type="text" name="nisn" placeholder="nisn" class="form-control" id="nisn">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Deskripsi</label>
+                        <label class="col-lg-2 control-label">Jurusan</label>
                         <div class="col-lg-12">
-                            <input type="text" name="deskripsi" placeholder="deskripsi" class="form-control" id="deskripsi">
+                            <select class="form-control" name="jurusan" id="jurusan">
+                                <option value="IPA">IPA</option>
+                                <option value="IPS">IPS</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Waktu</label>
+                        <label class="col-lg-2 control-label">Angkatan</label>
                         <div class="col-lg-12">
-                            <input type="Date" name="waktu" placeholder="waktu" class="form-control" id="waktu">
+                            <input type="text" name="angkatan" placeholder="angkatan" class="form-control" id="angkatan">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Foto</label>
+                        <label class="col-lg-2 control-label">Alamat</label>
+                        <div class="col-lg-12">
+                            <input type="text" name="alamat" placeholder="alamat" class="form-control" id="alamat">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Telp</label>
+                        <div class="col-lg-12">
+                            <input type="text" name="telp" placeholder="telp" class="form-control" id="telp">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">foto</label>
                         <div class="col-lg-10">
                             <input type="file" name="foto" />
-                            <input type="hidden" name="fotoo" class="form-control" id="fotoo">
+                            <input type="hidden" name="fotoo" id="fotoo" />
                         </div>
                     </div>
                 </div>
@@ -266,11 +259,13 @@
             const dataall = $(this).data('all');
             // console.log(dataall);
             $('#iddata').val(id);
+            $('#nama').val(dataall.nama_siswa);
+            $('#nisn').val(dataall.NISN);
+            $('#jurusan').val(dataall.jurusan);
+            $('#angkatan').val(dataall.angkatan);
+            $('#alamat').val(dataall.alamat);
+            $('#telp').val(dataall.telp);
             $('#fotoo').val(dataall.foto);
-            $('#namalomba').val(dataall.nama_lomba);
-            $('#penyelenggara').val(dataall.penyelenggara);
-            $('#deskripsi').val(dataall.deskripsi);
-            $('#waktu').val(dataall.waktu);
         });
     });
     setTimeout(function() {
