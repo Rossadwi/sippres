@@ -127,6 +127,7 @@
                                 <i class="nav-icon fas fa-book-reader"></i>
                                 <p>
                                     Pengajuan
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">

@@ -1,7 +1,6 @@
 @extends('layouts.appsiswa')
 
 @section('title', 'Page Title')
-@section('ismenu', 'menu-open')
 @section('aktifinfolomba', 'active')
 
 @prepend('style')

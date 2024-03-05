@@ -3,6 +3,7 @@
 use App\Http\Controllers\adminlinfolombacontroller;
 use App\Http\Controllers\adminlsiswacontroller;
 use App\Http\Controllers\adminluserscontroller;
+use App\Http\Controllers\siswalajuanprestasicontroller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,12 +70,20 @@ Route::prefix('siswa')->group(function () {
     // Route::delete('/deletelomba', [adminlinfolombacontroller::class, 'deletelomba'])->name('deletinfolomba');
     // });
 
+    Route::prefix('/pengajuan')->group(function () {
+        Route::prefix('/prestasi')->group(function () {
+            Route::get('/index', [siswalajuanprestasicontroller::class,'getajuanprestasi'])->name('ajuanprestasi');
+            Route::post('/insertajuanprestasi', [siswalajuanprestasicontroller::class, 'insertajuanprestasi'])->name('insertajuanprestasi');
+            Route::put('/updateajuanprestasi', [siswalajuanprestasicontroller::class, 'updateajuanprestasi'])->name('updateajuanprestasi');
+        });
+        // Route::get('/prestasi', function () {
+        //     return view('app.siswa.ajuanprestasi');
+        // })->name('ajuanprestasi');
+    });
+
     Route::get('/infolomba', function () {
         return view('app.siswa.infolomba');
     })->name('getinfolombasiswa');
-    Route::get('/pengajuan/prestasi', function () {
-        return view('app.siswa.ajuanprestasi');
-    })->name('ajuanprestasi');
     Route::get('/pengajuan/keaktifan', function () {
         return view('app.siswa.ajuankeaktifan');
     })->name('ajuankeaktifan');

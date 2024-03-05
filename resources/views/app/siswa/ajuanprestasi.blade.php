@@ -45,14 +45,42 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>id</th>
-                                    <th>name</th>
-                                    <th>email</th>
-                                    <th>role</th>
+                                    <th>judul</th>
+                                    <th>penyelenggara</th>
+                                    <th>bukti</th>
+                                    <th>tingkat</th>
+                                    <th>tanggal</th>
+                                    <th>status</th>
+                                    <th>note</th>
                                     <th>action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach(json_decode($data) as $row)
+                                <tr>
+                                    <td>{{$row->judul}}</td>
+                                    <td>{{$row->penyelenggara}}</td>
+                                    <td><img src="/prestasi/{{$row->bukti}}" width="75" alt="$row->bukti"></td>
+                                    <td>{{$row->tingkat}}</td>
+                                    <td>{{$row->tanggal}}</td>
+                                    <!-- <td>{{$row->isverif}}</td> -->
+                                    <td>
+                                        @if($row->isverif == 1)
+                                        <span class="badge badge-success">Diterima</span>
+                                        @elseif($row->isverif == 2)
+                                        <span class="badge badge-danger">Ditolak (REVISI)</span>
+                                        @elseif($row->isverif == 0)
+                                        <span class="badge badge-warning">Belum diverifikasi</span>
+                                        @endif
+                                    </td>
+                                    <td>{{$row->note}}</td>
+                                    <td>
+                                        @if($row->isverif == 2)
+                                        <a data-id="{{ $row->id_prestasi }}" data-all="{{json_encode($row)}}" class="btn btn-sm btn-warning edit" data-toggle="modal" data-target="#modal-edit" style="color: white;"><i class="bi bi-pencil-square"></i>EDIT</a>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -78,37 +106,39 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form name="frm_add" id="frm_add" class="form-horizontal" action="{{ route('insertusers') }}" method="POST" enctype="multipart/form-data">
+            <form name="frm_add" id="frm_add" class="form-horizontal" action="{{ route('insertajuanprestasi') }}" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Name</label>
+                        <label class="col-lg-2 control-label">Judul</label>
                         <div class="col-lg-12">
-                            <input type="text" name="name" placeholder="name" class="form-control">
+                            <input type="text" name="judul" placeholder="judul" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Email</label>
+                        <label class="col-lg-2 control-label">Penyelenggara</label>
                         <div class="col-lg-12">
-                            <input type="email" name="email" placeholder="email" class="form-control">
+                            <input type="text" name="penyelenggara" placeholder="penyelenggara" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Password</label>
+                        <label class="col-lg-2 control-label">Bukti</label>
                         <div class="col-lg-12">
-                            <input type="password" name="password" placeholder="Password" class="form-control">
+                            <input type="file" name="bukti" placeholder="bukti" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Role</label>
+                        <label class="col-lg-2 control-label">Tingkat</label>
                         <div class="col-lg-12">
-                            <select class="form-control" name="role" id="Role">
-                                <option value="0">Admin</option>
-                                <option value="1">Siswa</option>
-                            </select>
+                            <input type="text" name="tingkat" placeholder="tingkat" class="form-control">
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Tanggal</label>
+                        <div class="col-lg-12">
+                            <input type="date" name="tanggal" placeholder="tanggal" class="form-control">
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -127,42 +157,44 @@
                 <h4 class="modal-title">Edit Data</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
-            <form name="frm_edit" id="editform" class="form-horizontal" action="{{ route('updateusers') }}" method="POST" enctype="multipart/form-data">
+            <form name="frm_edit" id="editform" class="form-horizontal" action="{{ route('updateajuanprestasi') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Name</label>
+                <div class="form-group">
+                        <label class="col-lg-2 control-label">Judul</label>
                         <div class="col-lg-12">
                             <input type="hidden" name="iddata" class="form-control" id="iddata">
-                            <input type="text" name="name" placeholder="name" class="form-control" id="name">
+                            <input type="text" name="judul" placeholder="judul" class="form-control" id="judul">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Email</label>
+                        <label class="col-lg-2 control-label">Penyelenggara</label>
                         <div class="col-lg-12">
-                            <input type="email" name="email" placeholder="email" class="form-control" id="email">
+                            <input type="text" name="penyelenggara" placeholder="penyelenggara" class="form-control" id="penyelenggara">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Password</label>
+                        <label class="col-lg-2 control-label">Bukti</label>
                         <div class="col-lg-12">
-                            <input type="password" name="password" placeholder="Password" class="form-control" id="password">
-                            <input type="hidden" name="passwordd" placeholder="Password" class="form-control" id="passwordd">
+                            <input type="file" name="bukti" placeholder="bukti" class="form-control">
+                            <input type="hidden" name="buktii" class="form-control" id="buktii">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Role</label>
+                        <label class="col-lg-2 control-label">Tingkat</label>
                         <div class="col-lg-12">
-                            <select class="form-control" name="role" id="role">
-                                <option value="0">Admin</option>
-                                <option value="1">Siswa</option>
-                            </select>
+                            <input type="text" name="tingkat" placeholder="tingkat" class="form-control" id="tingkat">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Tanggal</label>
+                        <div class="col-lg-12">
+                            <input type="date" name="tanggal" placeholder="tanggal" class="form-control" id="tanggal">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="id" id="id">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
@@ -240,11 +272,13 @@
         $('#example1').on('click', '.edit', function() {
             let id = $(this).data('id');
             const dataall = $(this).data('all');
+            // console.log(dataall);
             $('#iddata').val(id);
-            $('#name').val(dataall.name);
-            $('#email').val(dataall.email);
-            $('#passwordd').val(dataall.password);
-            $('#role').val(dataall.role);
+            $('#judul').val(dataall.judul);
+            $('#penyelenggara').val(dataall.penyelenggara);
+            $('#buktii').val(dataall.bukti);
+            $('#tingkat').val(dataall.tingkat);
+            $('#tanggal').val(dataall.tanggal);
             // console.log(dataall.id);
         });
     });
