@@ -8,10 +8,11 @@
 
 
 @prepend('style')
+<link rel="stylesheet" href="/adminlte/plugins/sweetalert2/sweetalert2.min.css">
+<link rel="stylesheet" href="/adminlte/plugins/toastr/toastr.min.css">
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="/adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
 @endprepend
 
 @section('content')
@@ -38,11 +39,63 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="card mt-3">
+                <div class="card card-primary card-outline mt-4">
                     <div class="card-header">
-                        <h3 class="card-title">verif keaktifan</h3>
+                        <h3 class="card-title">
+                            <i class="fas fa-edit"></i>
+                            Verifikasi Keaktifan
+                        </h3>
                     </div>
+                    <div class="card-body">
+                        <!-- <h4>Custom Content Below</h4> -->
+                        <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab" aria-controls="custom-content-below-home" aria-selected="true">Belum Diverifikasi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-profile" role="tab" aria-controls="custom-content-below-profile" aria-selected="false">Sudah Diverifikasi</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="custom-content-below-tabContent">
+                            <div class="tab-pane fade show active" id="custom-content-below-home" role="tabpanel" aria-labelledby="custom-content-below-home-tab">
+                                <div class="mt-4">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Id Siswa</th>
+                                                <th>Nama Kegiatan</th>
+                                                <th>Penyelenggara</th>
+                                                <th>Waktu</th>
+                                                <th>Foto</th>
+                                                <th>Penyelenggara</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
 
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
+                                <div class="mt-4">
+                                    <table id="example2" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Id Siswa</th>
+                                                <th>Nama Kegiatan</th>
+                                                <th>Penyelenggara</th>
+                                                <th>Waktu</th>
+                                                <th>Foto</th>
+                                                <th>Penyelenggara</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -243,14 +296,59 @@
                 //         columns: [0, 1, 2, 3] // Kolom id, name, email,role
                 //     }
                 // }, "colvis",
-                {
-                    text: 'tambah ',
-                    action: function(e, dt, node, config) {
-                        $('#modalTambah').modal('show');
-                    }
-                }
+                // {
+                //     text: 'tambah ',
+                //     action: function(e, dt, node, config) {
+                //         $('#modalTambah').modal('show');
+                //     }
+                // }
             ]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+        $("#example2").DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            // "dom": 'Bfrtip',
+            "buttonsVisible": true,
+            //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            "buttons": [
+                // "copy",
+                // {
+                //     extend: "csv",
+                //     exportOptions: {
+                //         columns: [0, 1, 2, 3] // Kolom id, name, email,role
+                //     }
+
+                // }, {
+                //     extend: "excel",
+                //     exportOptions: {
+                //         columns: [0, 1, 2, 3] // Kolom id, name, email,role
+                //     }
+
+                // }, {
+                //     extend: "pdf",
+                //     exportOptions: {
+                //         columns: [0, 1, 2, 3] // Kolom id, name, email,role
+                //     }
+                // }, {
+                //     extend: "print",
+                //     exportOptions: {
+                //         columns: [0, 1, 2, 3] // Kolom id, name, email,role
+                //     }
+                // }, "colvis",
+                // {
+                //     text: 'tambah ',
+                //     action: function(e, dt, node, config) {
+                //         $('#modalTambah').modal('show');
+                //     }
+                // }
+            ]
+        }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
 
 
         $('#example1').on('click', '.edit', function() {

@@ -141,7 +141,11 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label">foto</label>
                         <div class="col-lg-10">
-                            <input type="file" name="foto" />
+                            <!-- <input type="file" name="foto" /> -->
+                            <label for="file-upload" class="btn btn-success">
+                                <i class="fas fa-upload"></i> Choose File
+                            </label>
+                            <input id="file-upload" type="file" name="foto" style="display: none;" />
                         </div>
                     </div>
 
@@ -211,13 +215,17 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label">foto</label>
                         <div class="col-lg-10">
-                            <input type="file" name="foto" />
+                            <label for="file-upload" class="btn btn-success">
+                                <i class="fas fa-upload"></i> Choose File
+                            </label>
+                            <input id="file-upload" type="file" name="foto" style="display: none;" />
+                            <!-- <input type="file" name="foto" /> -->
                             <input type="hidden" name="fotoo" id="fotoo" />
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
