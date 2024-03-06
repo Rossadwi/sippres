@@ -63,15 +63,31 @@
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Id Siswa</th>
+                                                <th>Nama Siswa</th>
                                                 <th>Nama Kegiatan</th>
                                                 <th>Penyelenggara</th>
                                                 <th>Waktu</th>
                                                 <th>Foto</th>
-                                                <th>Penyelenggara</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                            @foreach(json_decode($data) as $row)
+                                            <tr>
+                                                <td>{{$row->id_keaktifan}}</td>
+                                                <td>{{$row->nama_siswa}}</td>
+                                                <td>{{$row->nama_kegiatan}}</td>
+                                                <td>{{$row->penyelenggara}}</td>
+                                                <td>{{$row->waktu}}</td>
+                                                <td><img src="/keaktifan/{{$row->foto}}" width="75" alt="$row->foto"></td>
+                                                <td>
+                                                    @if($row->isverif == 0)
+                                                    <a data-id="{{ $row->id_keaktifan }}" data-all="{{json_encode($row)}}" class="btn btn-sm btn-warning edit" data-toggle="modal" data-target="#modal-edit" style="color: white;"><i class="bi bi-pencil-square"></i>EDIT</a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
 
                                     </table>
                                 </div>
@@ -82,15 +98,31 @@
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Id Siswa</th>
+                                                <th>Nama Siswa</th>
                                                 <th>Nama Kegiatan</th>
                                                 <th>Penyelenggara</th>
                                                 <th>Waktu</th>
                                                 <th>Foto</th>
-                                                <th>Penyelenggara</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                            @foreach(json_decode($dataverif) as $row)
+                                            <tr>
+                                                <td>{{$row->id_keaktifan}}</td>
+                                                <td>{{$row->nama_siswa}}</td>
+                                                <td>{{$row->nama_kegiatan}}</td>
+                                                <td>{{$row->penyelenggara}}</td>
+                                                <td>{{$row->waktu}}</td>
+                                                <td><img src="/keaktifan/{{$row->foto}}" width="75" alt="$row->foto"></td>
+                                                <td>
+                                                    @if($row->isverif == 0)
+                                                    <a data-id="{{ $row->id_keaktifan }}" data-all="{{json_encode($row)}}" class="btn btn-sm btn-warning edit" data-toggle="modal" data-target="#modal-edit" style="color: white;"><i class="bi bi-pencil-square"></i>EDIT</a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -172,62 +204,79 @@
 
 
 <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="titleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xs" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Edit Data</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
-            <form name="frm_edit" id="editform" class="form-horizontal" action="{{ route('updatesiswa') }}" method="POST" enctype="multipart/form-data">
+            <form name="frm_edit" id="editform" class="form-horizontal" action="{{ route('updateverifkeaktifan') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Nama</label>
-                        <div class="col-lg-12">
-
-                            <input type="hidden" name="iddata" class="form-control" id="iddata">
-                            <input type="text" name="name" placeholder="nama" class="form-control" id="nama">
+                    <div class="row">
+                        <div class="col-5 text-center d-flex align-items-center justify-content-center">
+                            <div class="fotobukti">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Nisn</label>
-                        <div class="col-lg-12">
-                            <input type="text" name="nisn" placeholder="nisn" class="form-control" id="nisn">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Jurusan</label>
-                        <div class="col-lg-12">
-                            <select class="form-control" name="jurusan" id="jurusan">
-                                <option value="IPA">IPA</option>
-                                <option value="IPS">IPS</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Angkatan</label>
-                        <div class="col-lg-12">
-                            <input type="text" name="angkatan" placeholder="angkatan" class="form-control" id="angkatan">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Alamat</label>
-                        <div class="col-lg-12">
-                            <input type="text" name="alamat" placeholder="alamat" class="form-control" id="alamat">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Telp</label>
-                        <div class="col-lg-12">
-                            <input type="text" name="telp" placeholder="telp" class="form-control" id="telp">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">foto</label>
-                        <div class="col-lg-10">
-                            <input type="file" name="foto" />
-                            <input type="hidden" name="fotoo" id="fotoo" />
+                        <div class="col-7">
+                            <!-- <div class="form-group">
+                                <label class="col-lg-8 control-label">id prestasi</label>
+                                <div class="col-lg-12">
+                                    </div>
+                                </div> -->
+                            <div class="form-group">
+                                <label class="col-lg-8 control-label">Nama Siswa</label>
+                                <div class="col-lg-12">
+                                    <input type="text" name="id_keaktifan" placeholder="id keaktifan" class="form-control" id="idkeaktifan">
+                                    <input type="text" name="namasiswa" placeholder="namasiswa" class="form-control" id="namasiswa" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">nama kegiatan</label>
+                                <div class="col-lg-12">
+                                    <input type="text" name="namakegiatan" placeholder="nama kegiatan" class="form-control" id="namakegiatan" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Penyelenggara</label>
+                                <div class="col-lg-12">
+                                    <input type="text" name="penyelenggara" placeholder="penyelenggara" class="form-control" id="penyelenggara" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Waktu</label>
+                                <div class="col-lg-12">
+                                    <input type="date" name="waktu" placeholder="waktu" class="form-control" id="waktu" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Verifikasi</label>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="isverif" id="option-ya" value="1">
+                                            <label class="form-check-label" for="option-ya">
+                                                Terima
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="isverif" id="option-tidak" value="2">
+                                            <label class="form-check-label" for="option-tidak">
+                                                Tolak
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Catatan</label>
+                                <div class="col-lg-12">
+                                    <textarea name="note" placeholder="catatan" class="form-control" id="note"></textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -354,15 +403,19 @@
         $('#example1').on('click', '.edit', function() {
             let id = $(this).data('id');
             const dataall = $(this).data('all');
-            // console.log(dataall);
-            $('#iddata').val(id);
-            $('#nama').val(dataall.nama_siswa);
-            $('#nisn').val(dataall.NISN);
-            $('#jurusan').val(dataall.jurusan);
-            $('#angkatan').val(dataall.angkatan);
-            $('#alamat').val(dataall.alamat);
-            $('#telp').val(dataall.telp);
-            $('#fotoo').val(dataall.foto);
+            const img = document.createElement('img');
+            img.src = "/keaktifan/" + dataall.foto;
+            // img.classList.add('img-fluid');
+            img.style.width = '250px';
+            img.style.height = '250px';
+            document.querySelector('.fotobukti').appendChild(img);
+            console.log(dataall);
+            $('#idkeaktifan').val(dataall.id_keaktifan);
+            $('#namasiswa').val(dataall.nama_siswa);
+            $('#namakegiatan').val(dataall.nama_kegiatan);
+            $('#penyelenggara').val(dataall.penyelenggara);
+            $('#waktu').val(dataall.waktu);
+            // $('#fotoo').val(dataall.foto);
         });
     });
     setTimeout(function() {

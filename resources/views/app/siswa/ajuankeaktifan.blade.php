@@ -45,14 +45,39 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>id</th>
-                                    <th>name</th>
-                                    <th>email</th>
-                                    <th>role</th>
+                                    <th>nama kegiatan</th>
+                                    <th>waktu</th>
+                                    <th>foto</th>
+                                    <th>penyelenggara</th>
+                                    <th>status</th>
+                                    <th>note</th>
                                     <th>action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach(json_decode($data) as $row)
+                                <tr>
+                                    <td>{{$row->nama_kegiatan}}</td>
+                                    <td>{{$row->waktu}}</td>
+                                    <td><img src="/keaktifan/{{$row->foto}}" width="75" alt="$row->foto"></td>
+                                    <td>{{$row->penyelenggara}}</td>
+                                    <td>
+                                        @if($row->isverif == 1)
+                                        <span class="badge badge-success">Diterima</span>
+                                        @elseif($row->isverif == 2)
+                                        <span class="badge badge-danger">Ditolak (REVISI)</span>
+                                        @elseif($row->isverif == 0)
+                                        <span class="badge badge-warning">Belum diverifikasi</span>
+                                        @endif
+                                    </td>
+                                    <td>{{$row->note}}</td>
+                                    <td>
+                                        @if($row->isverif == 2)
+                                        <a data-id="{{ $row->id_keaktifan }}" data-all="{{json_encode($row)}}" class="btn btn-sm btn-warning edit" data-toggle="modal" data-target="#modal-edit" style="color: white;"><i class="bi bi-pencil-square"></i>EDIT</a>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
 
                         </table>
@@ -79,37 +104,33 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form name="frm_add" id="frm_add" class="form-horizontal" action="{{ route('insertusers') }}" method="POST" enctype="multipart/form-data">
+            <form name="frm_add" id="frm_add" class="form-horizontal" action="{{ route('insertkeaktifan') }}" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Name</label>
+                        <label class="col-lg-7 control-label">Nama Kegiatan</label>
                         <div class="col-lg-12">
-                            <input type="text" name="name" placeholder="name" class="form-control">
+                            <input type="text" name="namakegiatan" placeholder="namakegiatan" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Email</label>
+                        <label class="col-lg-2 control-label">Waktu</label>
                         <div class="col-lg-12">
-                            <input type="email" name="email" placeholder="email" class="form-control">
+                            <input type="Date" name="waktu" placeholder="waktu" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Password</label>
+                        <label class="col-lg-2 control-label">Foto</label>
                         <div class="col-lg-12">
-                            <input type="password" name="password" placeholder="Password" class="form-control">
+                            <input type="file" name="foto" placeholder="foto" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Role</label>
+                        <label class="col-lg-2 control-label">Penyelenggara</label>
                         <div class="col-lg-12">
-                            <select class="form-control" name="role" id="Role">
-                                <option value="0">Admin</option>
-                                <option value="1">Siswa</option>
-                            </select>
+                            <input type="text" name="penyelenggara" placeholder="penyelenggara" class="form-control">
                         </div>
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -128,37 +149,34 @@
                 <h4 class="modal-title">Edit Data</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
-            <form name="frm_edit" id="editform" class="form-horizontal" action="{{ route('updateusers') }}" method="POST" enctype="multipart/form-data">
+            <form name="frm_edit" id="editform" class="form-horizontal" action="{{ route('updatekeaktifan') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Name</label>
+                        <label class="col-lg-7 control-label">Nama Kegiatan</label>
                         <div class="col-lg-12">
                             <input type="hidden" name="iddata" class="form-control" id="iddata">
-                            <input type="text" name="name" placeholder="name" class="form-control" id="name">
+                            <input type="text" name="namakegiatan" placeholder="namakegiatan" class="form-control" id="namakegiatan">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Email</label>
+                        <label class="col-lg-2 control-label">Waktu</label>
                         <div class="col-lg-12">
-                            <input type="email" name="email" placeholder="email" class="form-control" id="email">
+                            <input type="Date" name="waktu" placeholder="waktu" class="form-control" id="waktu">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Password</label>
+                        <label class="col-lg-2 control-label">Foto</label>
                         <div class="col-lg-12">
-                            <input type="password" name="password" placeholder="Password" class="form-control" id="password">
-                            <input type="hidden" name="passwordd" placeholder="Password" class="form-control" id="passwordd">
+                            <input type="file" name="foto" placeholder="foto" class="form-control">
+                            <input type="hidden" name="fotoo" class="form-control" id="fotoo">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Role</label>
+                        <label class="col-lg-2 control-label">Penyelenggara</label>
                         <div class="col-lg-12">
-                            <select class="form-control" name="role" id="role">
-                                <option value="0">Admin</option>
-                                <option value="1">Siswa</option>
-                            </select>
+                            <input type="text" name="penyelenggara" placeholder="penyelenggara" class="form-control" id="penyelenggara">
                         </div>
                     </div>
                 </div>
@@ -242,11 +260,11 @@
             let id = $(this).data('id');
             const dataall = $(this).data('all');
             $('#iddata').val(id);
-            $('#name').val(dataall.name);
-            $('#email').val(dataall.email);
-            $('#passwordd').val(dataall.password);
-            $('#role').val(dataall.role);
-            // console.log(dataall.id);
+            $('#namakegiatan').val(dataall.nama_kegiatan);
+            $('#waktu').val(dataall.waktu);
+            $('#fotoo').val(dataall.foto);
+            $('#penyelenggara').val(dataall.penyelenggara);
+            // console.log(dataall);
         });
     });
     setTimeout(function() {

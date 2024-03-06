@@ -3,6 +3,9 @@
 use App\Http\Controllers\adminlinfolombacontroller;
 use App\Http\Controllers\adminlsiswacontroller;
 use App\Http\Controllers\adminluserscontroller;
+use App\Http\Controllers\adminlverifkeaktifancontroller;
+use App\Http\Controllers\adminlverifprestasicontroller;
+use App\Http\Controllers\siswalajuankeaktifancontroller;
 use App\Http\Controllers\siswalajuanprestasicontroller;
 use Illuminate\Support\Facades\Route;
 
@@ -41,12 +44,16 @@ Route::prefix('admin')->group(function () {
         Route::delete('/deletelomba', [adminlinfolombacontroller::class, 'deletelomba'])->name('deletinfolomba');
     });
 
-    Route::get('/verifikasi/prestasi', function () {
-        return view('app.admin.verifprestasi');
-    })->name('verifprestasi');
-    Route::get('/verifikasi/keaktifan', function () {
-        return view('app.admin.verifkeaktifan');
-    })->name('verifkeaktifan');
+    Route::prefix('/verifikasi')->group(function () {
+        Route::prefix('/prestasi')->group(function () {
+            Route::get('/index', [adminlverifprestasicontroller::class, 'getverifprestasi'])->name('verifprestasi');
+            Route::put('/updateverifprestasi', [adminlverifprestasicontroller::class, 'updateverifprestasi'])->name('updateverifprestasi');
+        });
+        Route::prefix('/keaktifan')->group(function () {
+            Route::get('/index', [adminlverifkeaktifancontroller::class, 'getverifkeaktifan'])->name('verifkeaktifan');
+            Route::put('/updateverifkeaktifan', [adminlverifkeaktifancontroller::class, 'updateverifkeaktifan'])->name('updateverifkeaktifan');
+        });
+    });
 });
 
 Route::prefix('siswa')->group(function () {
@@ -72,9 +79,14 @@ Route::prefix('siswa')->group(function () {
 
     Route::prefix('/pengajuan')->group(function () {
         Route::prefix('/prestasi')->group(function () {
-            Route::get('/index', [siswalajuanprestasicontroller::class,'getajuanprestasi'])->name('ajuanprestasi');
+            Route::get('/index', [siswalajuanprestasicontroller::class, 'getajuanprestasi'])->name('ajuanprestasi');
             Route::post('/insertajuanprestasi', [siswalajuanprestasicontroller::class, 'insertajuanprestasi'])->name('insertajuanprestasi');
             Route::put('/updateajuanprestasi', [siswalajuanprestasicontroller::class, 'updateajuanprestasi'])->name('updateajuanprestasi');
+        });
+        Route::prefix('/keaktifan')->group(function () {
+            Route::get('/index', [siswalajuankeaktifancontroller::class, 'getkeaktifan'])->name('ajuankeaktifan');
+            Route::post('/insertkeaktifan', [siswalajuankeaktifancontroller::class, 'insertkeaktifan'])->name('insertkeaktifan');
+            Route::put('/updatekeaktifan', [siswalajuankeaktifancontroller::class, 'updatekeaktifan'])->name('updatekeaktifan');
         });
         // Route::get('/prestasi', function () {
         //     return view('app.siswa.ajuanprestasi');
@@ -84,7 +96,7 @@ Route::prefix('siswa')->group(function () {
     Route::get('/infolomba', function () {
         return view('app.siswa.infolomba');
     })->name('getinfolombasiswa');
-    Route::get('/pengajuan/keaktifan', function () {
-        return view('app.siswa.ajuankeaktifan');
-    })->name('ajuankeaktifan');
+    // Route::get('/pengajuan/keaktifan', function () {
+    //     return view('app.siswa.ajuankeaktifan');
+    // })->name('ajuankeaktifan');
 });
