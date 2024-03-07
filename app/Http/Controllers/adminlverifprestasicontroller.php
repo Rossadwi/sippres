@@ -75,7 +75,7 @@ class adminlverifprestasicontroller extends Controller
         $isverif = $input["isverif"];
         $note = $input["note"] ?? "";
 
-        DB::update("UPDATE prestasi SET isverif=?,note=? WHERE id_prestasi = ? ", [$isverif, $note, $id]);
+        DB::update("UPDATE prestasi SET isverif=?,note=?,updateat=? WHERE id_prestasi = ? ", [$isverif, $note,$this->sekarang, $id]);
         return redirect()->route('verifprestasi')->with('success', 'Data berhasil diupdate');
     }
 

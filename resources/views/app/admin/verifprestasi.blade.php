@@ -433,14 +433,14 @@
             "buttonsVisible": true,
             //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             "buttons": [
-                "copy",
-                {
-                    extend: "csv",
-                    exportOptions: {
-                        columns: [0, 1, 2, 3] // Kolom id, name, email,role
-                    }
+                // "copy",
+                // {
+                //     extend: "csv",
+                //     exportOptions: {
+                //         columns: [0, 1, 2, 3] // Kolom id, name, email,role
+                //     }
 
-                },
+                // },
                 {
                     extend: "excel",
                     exportOptions: {
@@ -448,12 +448,13 @@
                     }
 
                 },
+                // {
+                //     extend: "pdf",
+                //     exportOptions: {
+                //         columns: [1, 2, 3, 5, 6] // Kolom id, name, email,role
+                //     }
+                // }, 
                 {
-                    extend: "pdf",
-                    exportOptions: {
-                        columns: [1, 2, 3, 5, 6] // Kolom id, name, email,role
-                    }
-                }, {
                     extend: "print",
                     exportOptions: {
                         columns: [1, 2, 3, 5, 6] // Kolom id, name, email,role

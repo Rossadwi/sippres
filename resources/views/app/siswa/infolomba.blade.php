@@ -48,7 +48,7 @@
             <div class="row">
 
                 @foreach($data as $row)
-                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column infolomba">
                     <div class="card bg-light d-flex flex-fill">
                         <div class="card-header text-muted border-bottom-0">
                             {{$row->nama_lomba}}
@@ -78,7 +78,7 @@
                                 <!-- <a href="#" class="btn btn-sm bg-teal">
                                     <i class="fas fa-comments"></i>
                                 </a> -->
-                                <a href="#" class="btn btn-sm btn-primary">
+                                <a href="#" class="btn btn-sm btn-primary view" data-all="{{json_encode($row)}}" data-toggle="modal" data-target="#modal-view">
                                     <i class="fas fa-user"></i> View Poster
                                 </a>
                             </div>
@@ -119,10 +119,77 @@
 
     </div>
 
+
+    <!-- modal view data-->
+<div class="modal fade" id="modal-view" tabindex="-1" aria-labelledby="titleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">View Data</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-5 text-center d-flex align-items-center justify-content-center">
+                        <div class="fotobukti">
+                            <img id="vbuktifoto" width="250px" height="250px">
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <div class="form-group">
+                            <label class="col-lg-12 control-label">Nama Lomba</label>
+                            <div class="col-lg-12">
+                                <input type="text" name="namalomba" placeholder="Nama Lomba" class="form-control" id="vnamalomba" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Penyelenggara</label>
+                            <div class="col-lg-12">
+                                <input type="text" name="penyelenggara" placeholder="penyelenggara" class="form-control" id="vpenyelenggara" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Deskripsi</label>
+                            <div class="col-lg-12">
+                                <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" class="form-control" style="width: 100%;" disabled></textarea>
+                                <!-- <input type="text" name="tingkat" placeholder="tingkat" class="form-control" id="vtingkat" disabled> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-12 control-label">Waktu Pelaksanaan</label>
+                            <div class="col-lg-12">
+                                <input type="date" name="waktupelaksanaan" placeholder="Waktu Pelaksanaan" class="form-control" id="vwaktupelaksanaan" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </section>
 <div class="card-body"></div>
 @endsection
 
 @push('scripts')
 <script src="/adminlte/dist/js/demo.js"></script>
+<script>
+    $(function() {
+        $('.infolomba').on('click', '.view', function() {
+            let id = $(this).data('id');
+            const dataall = $(this).data('all');
+            console.log(dataall);
+            $('#vnamalomba').val(dataall.nama_lomba);
+            $('#vpenyelenggara').val(dataall.penyelenggara);
+            $('#deskripsi').val(dataall.deskripsi);
+            $('#vwaktupelaksanaan').val(dataall.waktu);
+            document.getElementById('vbuktifoto').src = "/poster/" + dataall.foto;
+            // console.log(dataall.id);
+        });
+    })
+</script>
 @endpush

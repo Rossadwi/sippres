@@ -73,7 +73,7 @@ class adminlverifkeaktifancontroller extends Controller
         $isverif = $input["isverif"];
         $note = $input["note"] ?? "";
 
-        DB::update("UPDATE keaktifan SET isverif=?,note=? WHERE id_keaktifan = ? ", [$isverif, $note, $id]);
+        DB::update("UPDATE keaktifan SET isverif=?,note=? ,updateat =? WHERE id_keaktifan = ? ", [$isverif, $note,$this->sekarang, $id]);
         return redirect()->route('verifkeaktifan')->with('success', 'Data berhasil diupdate');
     }
 
