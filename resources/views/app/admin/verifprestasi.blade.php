@@ -418,35 +418,6 @@
             //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             "buttons": [
                 // "copy",
-                // {
-                //     extend: "csv",
-                //     exportOptions: {
-                //         columns: [0, 1, 2, 3] // Kolom id, name, email,role
-                //     }
-
-                // }, {
-                //     extend: "excel",
-                //     exportOptions: {
-                //         columns: [0, 1, 2, 3] // Kolom id, name, email,role
-                //     }
-
-                // }, {
-                //     extend: "pdf",
-                //     exportOptions: {
-                //         columns: [0, 1, 2, 3] // Kolom id, name, email,role
-                //     }
-                // }, {
-                //     extend: "print",
-                //     exportOptions: {
-                //         columns: [0, 1, 2, 3] // Kolom id, name, email,role
-                //     }
-                // }, "colvis",
-                // {
-                //     text: 'tambah ',
-                //     action: function(e, dt, node, config) {
-                //         $('#modalTambah').modal('show');
-                //     }
-                // }
             ]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
@@ -462,32 +433,32 @@
             "buttonsVisible": true,
             //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             "buttons": [
-                 "copy",
-                 {
-                     extend: "csv",
-                     exportOptions: {
-                         columns: [0, 1, 2, 3] // Kolom id, name, email,role
-                     }
-
-                 }, 
+                "copy",
                 {
-                     extend: "excel",
-                     exportOptions: {
-                         columns: [0, 1, 2, 3] // Kolom id, name, email,role
-                     }
+                    extend: "csv",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3] // Kolom id, name, email,role
+                    }
 
-                 }, 
+                },
                 {
-                     extend: "pdf",
-                     exportOptions: {
-                         columns: [1, 2, 3,5,6] // Kolom id, name, email,role
-                     }
-                 }, {
+                    extend: "excel",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3] // Kolom id, name, email,role
+                    }
+
+                },
+                {
+                    extend: "pdf",
+                    exportOptions: {
+                        columns: [1, 2, 3, 5, 6] // Kolom id, name, email,role
+                    }
+                }, {
                     extend: "print",
-                     exportOptions: {
-                         columns: [1, 2, ,5,6] // Kolom id, name, email,role
-                     }
-                 }
+                    exportOptions: {
+                        columns: [1, 2, 3, 5, 6] // Kolom id, name, email,role
+                    }
+                }
                 //, "colvis",
                 // {
                 //     text: 'tambah ',
