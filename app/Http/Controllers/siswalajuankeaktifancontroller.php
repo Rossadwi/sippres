@@ -19,7 +19,8 @@ class siswalajuankeaktifancontroller extends Controller
     }
     public function getkeaktifan()
     {
-        $data = DB::select("select * from keaktifan");
+        $idsiswa = auth()->user()->tampilnmuser(auth()->user()->username)->id_siswa;
+        $data = DB::select("select * from keaktifan where id_siswa = ?",[$idsiswa]);
         $newjsondata = json_encode($data);
         return view('app/siswa/ajuankeaktifan', ['data' => $newjsondata]);
     }
@@ -27,6 +28,7 @@ class siswalajuankeaktifancontroller extends Controller
 
     public function insertkeaktifan(Request $request)
     {
+        $idsiswa = auth()->user()->tampilnmuser(auth()->user()->username)->id_siswa;
         // dd($request);
         $request->validate([
             'namakegiatan'    =>  'required',
@@ -52,7 +54,7 @@ class siswalajuankeaktifancontroller extends Controller
         $penyelenggara = $input["penyelenggara"];
         $fotoo = $foto ?? "";
 
-        DB::insert("INSERT INTO keaktifan(isverif, nama_kegiatan, waktu, foto, penyelenggara) VALUES (?,?,?,?,?)", [0, $namakegiatan, $waktu, $fotoo, $penyelenggara]);
+        DB::insert("INSERT INTO keaktifan(isverif, nama_kegiatan, waktu, foto, penyelenggara,id_siswa) VALUES (?,?,?,?,?,?)", [0, $namakegiatan, $waktu, $fotoo, $penyelenggara,$idsiswa]);
         return redirect()->route('ajuankeaktifan')->with('success', 'Data berhasil dimasukkan');
     }
 

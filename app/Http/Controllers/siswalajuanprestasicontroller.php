@@ -19,7 +19,8 @@ class siswalajuanprestasicontroller extends Controller
     }
     public function getajuanprestasi()
     {
-        $data = DB::select("select * from prestasi");
+        $idsiswa = auth()->user()->tampilnmuser(auth()->user()->username)->id_siswa;
+        $data = DB::select("select * from prestasi where id_siswa = ?",[$idsiswa]);
         $newjsondata = json_encode($data);
         return view('app/siswa/ajuanprestasi', ['data' => $newjsondata]);
     }
@@ -53,7 +54,8 @@ class siswalajuanprestasicontroller extends Controller
         $penyelenggara = $input["penyelenggara"];
         $tingkat = $input["tingkat"];
         $tanggal = $input["tanggal"];
-        DB::insert("INSERT INTO prestasi(judul, penyelenggara,bukti, tingkat, tanggal) VALUES (?,?,?,?,?)", [$judul, $penyelenggara, $foto, $tingkat, $tanggal]);
+        $iduser =  auth()->user()->tampilnmuser(auth()->user()->username)->id_siswa;
+        DB::insert("INSERT INTO prestasi(judul, penyelenggara,bukti, tingkat, tanggal,isverif,id_siswa) VALUES (?,?,?,?,?,?,?)", [$judul, $penyelenggara, $foto, $tingkat, $tanggal,0,$iduser]);
 
         return redirect()->route('ajuanprestasi')->with('success', 'Data berhasil dimasukkan');
     }
