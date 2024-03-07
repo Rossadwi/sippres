@@ -84,10 +84,10 @@
                         <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">{{auth()->user()->name}}</a>
+                        <a href="#" class="d-block">{{auth()->user()->tampilnmuser(auth()->user()->username)->nama_siswa}}</a>
                     </div>
                 </div>
-                @endauth
+
 
                 <nav class="mt-2">
 
@@ -106,6 +106,7 @@
 
                         <li class="nav-item">
                             <a href="{{route('profilesiswa')}}" class="nav-link @yield('aktifprofilsiswa')">
+                                <!-- <a href="{{route('profilesiswa')}}" class="nav-link @yield('aktifprofilsiswa')"> -->
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
                                     Profil
@@ -165,7 +166,7 @@
 
                     </ul>
                 </nav>
-
+                @endauth
             </div>
 
         </aside>

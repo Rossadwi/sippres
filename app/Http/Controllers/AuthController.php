@@ -25,9 +25,14 @@ class AuthController extends Controller
         $user = Auth::user();
         // validasi
         $credentials = $request->validate([
-            'email' => 'required|email',
-            // 'username' => 'required',
+            // 'email' => 'required|email',
+            'username' => 'required',
             'password' => 'required'
+        ], [
+            // 'email.required' => 'email harus diisi',
+            'username.required' => 'username harus diisi',
+            // 'email.email' => 'email tidak valid',
+            'password' => 'password harus diisi'
         ]);
 
         if (auth()->attempt($credentials)) {
@@ -52,9 +57,6 @@ class AuthController extends Controller
                 return redirect()->intended('/siswa');
             }
         }
-
-        // jika email atau password salah
-        // kirimkan session error
         return back()->with('error', 'email atau password salah');
     }
 

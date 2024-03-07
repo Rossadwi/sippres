@@ -16,18 +16,34 @@
 </head>
 
 <body class="hold-transition login-page">
+
     <div class="login-box">
 
         <div class="card-body login-card-body ">
             <div class="login-logo">
                 <img src="/adminlte/dist/img/sippreslogo.png" width="150px">
             </div>
+            @if($errors->any())
+            <div class="alert alert-danger" id="alertMessage">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
+            @if (session()->has('error'))
+            <div class="alert alert-danger" id="alertMessage">
+                {{ session('error') }}
+            </div>
+            @endif
             <!-- <img src="/adminlte/dist/img/sippreslogo.png" alt="Image" class="img-fluid mb-3">
             <br> -->
             <form action="{{route('proseslogin')}}" method="POST">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" name="email" placeholder="Email">
+                    <input type="text" class="form-control" name="username" placeholder="username">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>

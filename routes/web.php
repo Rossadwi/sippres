@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\siswalajuankeaktifancontroller;
 use App\Http\Controllers\siswalajuanprestasicontroller;
 use App\Http\Controllers\siswalinfolombacontroller;
+use App\Http\Controllers\siswalprofilecontroller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
@@ -73,9 +74,7 @@ Route::group(['middleware' => ['auth', 'checkrole:0']], function () {
         Route::get('/', function () {
             return view('app.siswa.dashboard');
         })->name('dashboardsiswa');
-        Route::get('/profile', function () {
-            return view('app.siswa.profile');
-        })->name('profilesiswa');
+        Route::get('/profile', [siswalprofilecontroller::class, 'getprofile'])->name('profilesiswa');
         Route::prefix('/pengajuan')->group(function () {
             Route::prefix('/prestasi')->group(function () {
                 Route::get('/index', [siswalajuanprestasicontroller::class, 'getajuanprestasi'])->name('ajuanprestasi');

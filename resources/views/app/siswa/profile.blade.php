@@ -43,42 +43,50 @@
 </section>
 
 <section class="content">
+    @auth
     <div class="card card-solid">
 
         <div class="card-body row">
             <div class="col-5 text-center d-flex align-items-center justify-content-center">
-                <div class>
-                    <h2>Admin<strong>LTE</strong></h2>
-                    <p class="lead mb-5">123 Testing Ave, Testtown, 9876 NA<br>
-                        Phone: +1 234 56789012
-                    </p>
+                <div class="fotobukti">
+                    <img id="vbukti" width="250px" height="250px" src="/images/{{auth()->user()->tampilnmuser(auth()->user()->username)->foto}}">
                 </div>
             </div>
             <div class="col-7">
                 <div class="form-group">
-                    <label for="inputName">Name</label>
-                    <input type="text" id="inputName" class="form-control" />
+                    <label for="inputName">Nama</label>
+                    <input type="text" id="inputName" class="form-control" value="{{auth()->user()->tampilnmuser(auth()->user()->username)->nama_siswa}}" />
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail">E-Mail</label>
-                    <input type="email" id="inputEmail" class="form-control" />
+                    <label for="inputEmail">Nisn</label>
+                    <input type="text" id="inputEmail" class="form-control" value="{{auth()->user()->tampilnmuser(auth()->user()->username)->NISN}}" />
                 </div>
                 <div class="form-group">
-                    <label for="inputSubject">Subject</label>
-                    <input type="text" id="inputSubject" class="form-control" />
+                    <label for="Jurusan">Jurusan</label>
+                    <input type="text" id="Jurusan" class="form-control" value="{{auth()->user()->tampilnmuser(auth()->user()->username)->jurusan}}" />
                 </div>
                 <div class="form-group">
-                    <label for="inputMessage">Message</label>
-                    <textarea id="inputMessage" class="form-control" rows="4"></textarea>
+                    <label for="inputSubject">Angkatan</label>
+                    <input type="text" id="inputSubject" class="form-control" value="{{auth()->user()->tampilnmuser(auth()->user()->username)->angkatan}}" />
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Send message">
+                    <label for="inputSubject">Alamat</label>
+                    <input type="text" id="inputSubject" class="form-control" value="{{auth()->user()->tampilnmuser(auth()->user()->username)->alamat}}" />
+                </div>
+                <div class="form-group">
+                    <label for="inputSubject">Telp</label>
+                    <input type="text" id="inputSubject" class="form-control" value="{{auth()->user()->tampilnmuser(auth()->user()->username)->telp}}" />
+                </div>
+
+                <div class="form-group">
+                    <!-- <input type="submit" class="btn btn-primary" value="Send message"> -->
                 </div>
             </div>
         </div>
 
     </div>
     <div class="card-body"></div>
+    @endauth
 </section>
 
 
