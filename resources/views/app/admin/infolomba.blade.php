@@ -127,12 +127,16 @@
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Foto</label>
-                        <div class="col-lg-10">
-                            <label for="file-upload" class="btn btn-success">
+                        <div class="col-lg-12">
+                            <!-- <label for="file-upload" class="btn btn-success">
                                 <i class="fas fa-upload"></i> Choose File
                             </label>
-                            <input id="file-upload" type="file" name="foto" style="display: none;" />
+                            <input id="file-upload" type="file" name="foto" style="display: none;" /> -->
                             <!-- <input type="file" name="foto" /> -->
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile" name="foto">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -145,9 +149,9 @@
     </div>
 </div>
 
-
+<!-- modal edit data-->
 <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="titleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xs" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Edit Data</h4>
@@ -157,41 +161,50 @@
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label class="col-lg-4 control-label">Nama lomba</label>
-                        <div class="col-lg-12">
-                            <input type="hidden" name="iddata" class="form-control" id="iddata">
-                            <input type="text" name="nama_lomba" placeholder="nama lomba" class="form-control" id="namalomba">
+                    <div class="row">
+                        <div class="col-5 text-center d-flex align-items-center justify-content-center">
+                            <img id="foto" width="250px" height="250px">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Penyelenggara</label>
-                        <div class="col-lg-12">
-                            <input type="text" name="penyelenggara" placeholder="penyelenggara" class="form-control" id="penyelenggara">
+                        <div class="col-7">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Nama lomba</label>
+                                <div class="col-lg-12">
+                                    <input type="hidden" name="iddata" class="form-control" id="iddata">
+                                    <input type="text" name="nama_lomba" placeholder="nama lomba" class="form-control" id="namalomba">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Penyelenggara</label>
+                                <div class="col-lg-12">
+                                    <input type="text" name="penyelenggara" placeholder="penyelenggara" class="form-control" id="penyelenggara">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Deskripsi</label>
+                                <div class="col-lg-12">
+                                    <input type="text" name="deskripsi" placeholder="deskripsi" class="form-control" id="deskripsi">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Waktu</label>
+                                <div class="col-lg-12">
+                                    <input type="Date" name="waktu" placeholder="waktu" class="form-control" id="waktu">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Foto</label>
+                                <div class="col-lg-12">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" name="foto">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                    <!-- <input type="file" name="foto" /> -->
+                                    <input type="hidden" name="fotoo" class="form-control" id="fotoo">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Deskripsi</label>
-                        <div class="col-lg-12">
-                            <input type="text" name="deskripsi" placeholder="deskripsi" class="form-control" id="deskripsi">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Waktu</label>
-                        <div class="col-lg-12">
-                            <input type="Date" name="waktu" placeholder="waktu" class="form-control" id="waktu">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Foto</label>
-                        <div class="col-lg-10">
-                            <label for="file-upload" class="btn btn-success">
-                                <i class="fas fa-upload"></i> Choose File
-                            </label>
-                            <input id="file-upload" type="file" name="foto" style="display: none;" />
-                            <!-- <input type="file" name="foto" /> -->
-                            <input type="hidden" name="fotoo" class="form-control" id="fotoo">
-                        </div>
+
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -279,6 +292,12 @@
             $('#penyelenggara').val(dataall.penyelenggara);
             $('#deskripsi').val(dataall.deskripsi);
             $('#waktu').val(dataall.waktu);
+            document.getElementById('foto').src = "/poster/" + dataall.foto;
+        });
+
+        $('.custom-file-input').on('change', function() {
+            const fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').addClass("selected").html(fileName);
         });
     });
     setTimeout(function() {

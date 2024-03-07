@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class adminlinfolombacontroller extends Controller
+class siswalinfolombacontroller extends Controller
 {
 
     private $sekarang;
@@ -17,11 +17,13 @@ class adminlinfolombacontroller extends Controller
         $nowind = $now->setTimezone('Asia/Jakarta');
         $this->sekarang = $nowind->format('ymdHis');
     }
+
     public function getinfolomba()
     {
-        $data = DB::select("select * from infolomba");
-        $newjsondata = json_encode($data);
-        return view('app/admin/infolomba', ['data' => $newjsondata]);
+        $data = DB::table('infolomba')->orderBy('createddate', 'DESC')->paginate(10);
+        // $data = DB::select("SELECT * FROM infolomba ORDER BY createddate DESC");
+        // $newjsondata = json_encode($data);
+        return view('app/siswa/infolomba', ['data' => $data]);
     }
 
 

@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/adminlte/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css?v=3.2.0">
+    <link rel="stylesheet" href="/adminlte/dist/css/adminlte.min.css">
     @stack('style')
 </head>
 
@@ -78,15 +78,16 @@
             </a>
 
             <div class="sidebar">
-
+                @auth
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
                         <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block">{{auth()->user()->name}}</a>
                     </div>
                 </div>
+                @endauth
 
                 <nav class="mt-2">
 
@@ -153,6 +154,14 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('proseslogout')}}" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Logout
+                                </p>
+                            </a>
+                        </li>
 
                     </ul>
                 </nav>
@@ -193,7 +202,7 @@
 
     <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <script src="/adminlte/dist/js/adminlte.min.js?v=3.2.0"></script>
+    <script src="/adminlte/dist/js/adminlte.min.js"></script>
     @stack('scripts')
 </body>
 

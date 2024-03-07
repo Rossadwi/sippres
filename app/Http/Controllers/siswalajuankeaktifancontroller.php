@@ -88,7 +88,7 @@ class siswalajuankeaktifancontroller extends Controller
         $fotoo = $foto ?? $input["fotoo"];
         $id = $input["iddata"];
 
-        DB::update("UPDATE keaktifan SET isverif=?,nama_kegiatan=?,waktu=?,foto=?,penyelenggara=? WHERE id_keaktifan = ? ", [0, $namakegiatan, $waktu, $fotoo, $penyelenggara, $id]);
+        DB::update("UPDATE keaktifan SET isverif=?,nama_kegiatan=?,waktu=?,foto=?,penyelenggara=?,note=? WHERE id_keaktifan = ? ", [0, $namakegiatan, $waktu, $fotoo, $penyelenggara, "", $id]);
         return redirect()->route('ajuankeaktifan')->with('success', 'Data berhasil diupdate');
     }
     public function deletesiswa(Request $request)

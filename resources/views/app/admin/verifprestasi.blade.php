@@ -124,8 +124,8 @@
                                                 <td>{{$row->tanggal}}</td>
                                                 <!-- <td>{{$row->isverif}}</td> -->
                                                 <td>
-                                                    @if($row->isverif == 2)
-                                                    <!-- <a data-id="{{ $row->id_prestasi }}" data-all="{{json_encode($row)}}" class="btn btn-sm btn-warning edit" data-toggle="modal" data-target="#modal-edit" style="color: white;"><i class="bi bi-pencil-square"></i>EDIT</a> -->
+                                                    @if($row->isverif == 1)
+                                                    <a data-id="{{ $row->id_prestasi }}" data-all="{{json_encode($row)}}" class="btn btn-sm btn-info view" data-toggle="modal" data-target="#modal-view" style="color: white;"><i class="bi bi-pencil-square"></i>Lihat</a>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -211,7 +211,7 @@
     </div>
 </div>
 
-
+<!-- modal edit data-->
 <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="titleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -226,14 +226,10 @@
                     <div class="row">
                         <div class="col-5 text-center d-flex align-items-center justify-content-center">
                             <div class="fotobukti">
+                                <img id="bukti" width="250px" height="250px">
                             </div>
                         </div>
                         <div class="col-7">
-                            <!-- <div class="form-group">
-                                <label class="col-lg-8 control-label">id prestasi</label>
-                                <div class="col-lg-12">
-                                    </div>
-                                </div> -->
                             <div class="form-group">
                                 <label class="col-lg-8 control-label">Nama Siswa</label>
                                 <div class="col-lg-12">
@@ -296,10 +292,95 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- modal view data-->
+
+<div class="modal fade" id="modal-view" tabindex="-1" aria-labelledby="titleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Detail Data</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-5 text-center d-flex align-items-center justify-content-center">
+                        <div class="fotobukti">
+                            <img id="vbukti" width="250px" height="250px">
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <div class="form-group">
+                            <label class="col-lg-8 control-label">Nama Siswa</label>
+                            <div class="col-lg-12">
+                                <input type="hidden" name="id_prestasi" placeholder="id prestasi" class="form-control" id="vidprestasi">
+                                <input type="text" name="namasiswa" placeholder="namasiswa" class="form-control" id="vnamasiswa" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Judul</label>
+                            <div class="col-lg-12">
+                                <input type="text" name="judul" placeholder="judul" class="form-control" id="vjudul" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Penyelenggara</label>
+                            <div class="col-lg-12">
+                                <input type="text" name="penyelenggara" placeholder="penyelenggara" class="form-control" id="vpenyelenggara" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Tingkat</label>
+                            <div class="col-lg-12">
+                                <input type="text" name="tingkat" placeholder="tingkat" class="form-control" id="vtingkat" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Tanggal</label>
+                            <div class="col-lg-12">
+                                <input type="date" name="tanggal" placeholder="tanggal" class="form-control" id="vtanggal" disabled>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label class="col-lg-2 control-label">Verifikasi</label>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isverif" id="voption-ya" value="1">
+                                        <label class="form-check-label" for="option-ya">
+                                            Terima
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="isverif" id="voption-tidak" value="2">
+                                        <label class="form-check-label" for="option-tidak">
+                                            Tolak
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Catatan</label>
+                            <div class="col-lg-12">
+                                <textarea name="note" placeholder="catatan" class="form-control" id="vnote"></textarea>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
         </div>
     </div>
 </div>
@@ -418,20 +499,31 @@
         $('#example1').on('click', '.edit', function() {
             let id = $(this).data('id');
             const dataall = $(this).data('all');
-            const img = document.createElement('img');
-            img.src = "/prestasi/" + dataall.bukti;
-            // img.classList.add('img-fluid');
-            img.style.width = '250px';
-            img.style.height = '250px';
-            document.querySelector('.fotobukti').appendChild(img);
-            console.log(dataall);
+            // console.log(dataall);
             $('#idprestasi').val(dataall.id_prestasi);
             $('#namasiswa').val(dataall.nama_siswa);
             $('#judul').val(dataall.judul);
             $('#penyelenggara').val(dataall.penyelenggara);
             $('#tingkat').val(dataall.tingkat);
             $('#tanggal').val(dataall.tanggal);
+            document.getElementById('bukti').src = "/prestasi/" + dataall.bukti;
         });
+
+        $('#example2').on('click', '.view', function() {
+            let id = $(this).data('id');
+            const dataall = $(this).data('all');
+            // console.log(dataall);
+            $('#vidprestasi').val(dataall.id_prestasi);
+            $('#vnamasiswa').val(dataall.nama_siswa);
+            $('#vjudul').val(dataall.judul);
+            $('#vpenyelenggara').val(dataall.penyelenggara);
+            $('#vtingkat').val(dataall.tingkat);
+            $('#vtanggal').val(dataall.tanggal);
+            document.getElementById('vbukti').src = "/prestasi/" + dataall.bukti;
+        });
+
+
+
 
 
 

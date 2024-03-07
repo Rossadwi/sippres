@@ -74,6 +74,8 @@
                                     <td>
                                         @if($row->isverif == 2)
                                         <a data-id="{{ $row->id_keaktifan }}" data-all="{{json_encode($row)}}" class="btn btn-sm btn-warning edit" data-toggle="modal" data-target="#modal-edit" style="color: white;"><i class="bi bi-pencil-square"></i>EDIT</a>
+                                        @elseif($row->isverif != 2)
+                                        <a data-id="{{ $row->id_keaktifan }}" data-all="{{json_encode($row)}}" class="btn btn-sm btn-info view" data-toggle="modal" data-target="#modal-view" style="color: white;"><i class="bi bi-pencil-square"></i>Lihat</a>
                                         @endif
                                     </td>
                                 </tr>
@@ -122,7 +124,11 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Foto</label>
                         <div class="col-lg-12">
-                            <input type="file" name="foto" placeholder="foto" class="form-control">
+                            <!-- <input type="file" name="foto" placeholder="foto" class="form-control"> -->
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="foto">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -141,9 +147,9 @@
     </div>
 </div>
 
-
+<!-- modal edit data-->
 <div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="titleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xs" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Edit Data</h4>
@@ -153,39 +159,98 @@
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label class="col-lg-7 control-label">Nama Kegiatan</label>
-                        <div class="col-lg-12">
-                            <input type="hidden" name="iddata" class="form-control" id="iddata">
-                            <input type="text" name="namakegiatan" placeholder="namakegiatan" class="form-control" id="namakegiatan">
+                    <div class="row">
+                        <div class="col-5 text-center d-flex align-items-center justify-content-center">
+                            <div class="fotobukti">
+                                <img id="fotokeaktifan" width="250px" height="250px">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Waktu</label>
-                        <div class="col-lg-12">
-                            <input type="Date" name="waktu" placeholder="waktu" class="form-control" id="waktu">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Foto</label>
-                        <div class="col-lg-12">
-                            <input type="file" name="foto" placeholder="foto" class="form-control">
-                            <input type="hidden" name="fotoo" class="form-control" id="fotoo">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Penyelenggara</label>
-                        <div class="col-lg-12">
-                            <input type="text" name="penyelenggara" placeholder="penyelenggara" class="form-control" id="penyelenggara">
+                        <div class="col-7">
+                            <div class="form-group">
+                                <label class="col-lg-7 control-label">Nama Kegiatan</label>
+                                <div class="col-lg-12">
+                                    <input type="hidden" name="iddata" class="form-control" id="iddata">
+                                    <input type="text" name="namakegiatan" placeholder="namakegiatan" class="form-control" id="namakegiatan">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Waktu</label>
+                                <div class="col-lg-12">
+                                    <input type="Date" name="waktu" placeholder="waktu" class="form-control" id="waktu">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Foto</label>
+                                <div class="col-lg-12">
+                                    <!-- <input type="file" name="foto" placeholder="foto" class="form-control"> -->
+                                    <input type="hidden" name="fotoo" class="form-control" id="fotoo">
+
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="foto">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Penyelenggara</label>
+                                <div class="col-lg-12">
+                                    <input type="text" name="penyelenggara" placeholder="penyelenggara" class="form-control" id="penyelenggara">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="id" id="id">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- modal view data-->
+<div class="modal fade" id="modal-view" tabindex="-1" aria-labelledby="titleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Detail Data</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-5 text-center d-flex align-items-center justify-content-center">
+                        <div class="fotobukti">
+                            <img id="vfotokeaktifan" width="250px" height="250px">
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <div class="form-group">
+                            <label class="col-lg-7 control-label">Nama Kegiatan</label>
+                            <div class="col-lg-12">
+                                <input type="hidden" name="iddata" class="form-control" id="iddata">
+                                <input type="text" name="namakegiatan" placeholder="namakegiatan" class="form-control" id="vnamakegiatan" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Waktu</label>
+                            <div class="col-lg-12">
+                                <input type="Date" name="waktu" placeholder="waktu" class="form-control" id="vwaktu" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Penyelenggara</label>
+                            <div class="col-lg-12">
+                                <input type="text" name="penyelenggara" placeholder="penyelenggara" class="form-control" id="vpenyelenggara" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
         </div>
     </div>
 </div>
@@ -264,7 +329,23 @@
             $('#waktu').val(dataall.waktu);
             $('#fotoo').val(dataall.foto);
             $('#penyelenggara').val(dataall.penyelenggara);
+            document.getElementById('fotokeaktifan').src = "/keaktifan/" + dataall.foto;
             // console.log(dataall);
+        });
+
+        $('#example1').on('click', '.view', function() {
+            let id = $(this).data('id');
+            const dataall = $(this).data('all');
+            $('#vnamakegiatan').val(dataall.nama_kegiatan);
+            $('#vwaktu').val(dataall.waktu);
+            $('#vpenyelenggara').val(dataall.penyelenggara);
+            document.getElementById('vfotokeaktifan').src = "/keaktifan/" + dataall.foto;
+            // console.log(dataall);
+        });
+
+        $('.custom-file-input').on('change', function() {
+            const fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').addClass("selected").html(fileName);
         });
     });
     setTimeout(function() {

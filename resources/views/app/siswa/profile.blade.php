@@ -43,7 +43,8 @@
 </section>
 
 <section class="content">
-    <div class="card">
+    <div class="card card-solid">
+
         <div class="card-body row">
             <div class="col-5 text-center d-flex align-items-center justify-content-center">
                 <div class>
@@ -75,7 +76,9 @@
                 </div>
             </div>
         </div>
+
     </div>
+    <div class="card-body"></div>
 </section>
 
 
