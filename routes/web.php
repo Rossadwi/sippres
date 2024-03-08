@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adminldashboardcontroller;
 use App\Http\Controllers\adminlinfolombacontroller;
 use App\Http\Controllers\adminlsiswacontroller;
 use App\Http\Controllers\adminluserscontroller;
@@ -8,6 +9,7 @@ use App\Http\Controllers\adminlverifprestasicontroller;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\siswalajuankeaktifancontroller;
 use App\Http\Controllers\siswalajuanprestasicontroller;
+use App\Http\Controllers\siswaldashboardcontroller;
 use App\Http\Controllers\siswalinfolombacontroller;
 use App\Http\Controllers\siswalprofilecontroller;
 use Illuminate\Support\Facades\Hash;
@@ -31,9 +33,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth', 'checkrole:1']], function () {
     Route::prefix('admin')->group(function () {
-        Route::get('/', function () {
-            return view('app.admin.dashboard');
-        })->name('dashboardadmin');
+        Route::get('/', [adminldashboardcontroller::class,'getdashboard'])->name('dashboardadmin');
         Route::prefix('/users')->group(function () {
             Route::get('/index', [adminluserscontroller::class, 'getusers'])->name('getusers');
             Route::post('/insertuser', [adminluserscontroller::class, 'insertuser'])->name('insertusers');
@@ -71,9 +71,7 @@ Route::group(['middleware' => ['auth', 'checkrole:1']], function () {
 
 Route::group(['middleware' => ['auth', 'checkrole:0']], function () {
     Route::prefix('siswa')->group(function () {
-        Route::get('/', function () {
-            return view('app.siswa.dashboard');
-        })->name('dashboardsiswa');
+        Route::get('/', [siswaldashboardcontroller::class,'getdashboard'])->name('dashboardsiswa');
         Route::get('/profile', [siswalprofilecontroller::class, 'getprofile'])->name('profilesiswa');
         Route::prefix('/pengajuan')->group(function () {
             Route::prefix('/prestasi')->group(function () {
