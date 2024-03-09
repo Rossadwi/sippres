@@ -7,6 +7,7 @@ use App\Http\Controllers\adminluserscontroller;
 use App\Http\Controllers\adminlverifkeaktifancontroller;
 use App\Http\Controllers\adminlverifprestasicontroller;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\landingpagecontroller;
 use App\Http\Controllers\siswalajuankeaktifancontroller;
 use App\Http\Controllers\siswalajuanprestasicontroller;
 use App\Http\Controllers\siswaldashboardcontroller;
@@ -26,9 +27,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [landingpagecontroller::class,'getdata']);
 // Route::get('/', function () {
-//     $pwd = Hash::make("0-opklm,");
-//     echo $pwd;
+//     return view('landing/index');
 // });
 
 Route::group(['middleware' => ['auth', 'checkrole:1']], function () {
