@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [landingpagecontroller::class,'getdata']);
+Route::get('/', [landingpagecontroller::class, 'getdata']);
 // Route::get('/', function () {
 //     // echo hash::make('1234');
 //     return view('landing/index');
@@ -35,7 +35,7 @@ Route::get('/', [landingpagecontroller::class,'getdata']);
 
 Route::group(['middleware' => ['auth', 'checkrole:1']], function () {
     Route::prefix('admin')->group(function () {
-        Route::get('/', [adminldashboardcontroller::class,'getdashboard'])->name('dashboardadmin');
+        Route::get('/', [adminldashboardcontroller::class, 'getdashboard'])->name('dashboardadmin');
         Route::prefix('/users')->group(function () {
             Route::get('/index', [adminluserscontroller::class, 'getusers'])->name('getusers');
             Route::post('/insertuser', [adminluserscontroller::class, 'insertuser'])->name('insertusers');
@@ -73,8 +73,14 @@ Route::group(['middleware' => ['auth', 'checkrole:1']], function () {
 
 Route::group(['middleware' => ['auth', 'checkrole:0']], function () {
     Route::prefix('siswa')->group(function () {
-        Route::get('/', [siswaldashboardcontroller::class,'getdashboard'])->name('dashboardsiswa');
-        Route::get('/profile', [siswalprofilecontroller::class, 'getprofile'])->name('profilesiswa');
+        Route::get('/', [siswaldashboardcontroller::class, 'getdashboard'])->name('dashboardsiswa');
+        Route::prefix('/profile')->group(function () {
+            Route::get('/', [siswalprofilecontroller::class, 'getprofile'])->name('profilesiswa');
+            Route::put('/updatepasssiswa', [siswalprofilecontroller::class, 'editpwd'])->name('updatepasssiswa');
+            Route::put('/updatefotosiswa', [siswalprofilecontroller::class, 'editfoto'])->name('updatefotosiswa');
+        });
+
+
         Route::prefix('/pengajuan')->group(function () {
             Route::prefix('/prestasi')->group(function () {
                 Route::get('/index', [siswalajuanprestasicontroller::class, 'getajuanprestasi'])->name('ajuanprestasi');

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +14,7 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -49,7 +48,7 @@
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
                     <!-- <h1 class="m-0"><i class="fa fa-search me-2"></i>SIPP<span class="fs-13">re</span>S</h1> -->
-                    <h1 style="color: #02adef;"><img src="/adminlte/dist/img/sippreslogo.png" width="50px" height="50px" style="margin-right: 12px;" class="mr-7"/>SIPP<span class="fs-13">re</span>S</h1>
+                    <h1><img src="/adminlte/dist/img/sippreslogo.png" width="50px" height="50px" style="margin-right: 12px;" class="mr-7" />SIPP<span class="fs-13">re</span>S</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -59,7 +58,7 @@
                     <div class="navbar-nav ms-auto py-0">
                         <a href="#home" class="nav-item nav-link">Home</a>
                         <a href="#prestasi" class="nav-item nav-link">Prestasi</a>
-                        <a href="{{route('login')}}" class="nav-item nav-link" >Sign in</a>
+                        <a href="{{route('login')}}" class="nav-item nav-link">Sign in</a>
 
                     </div>
                 </div>
@@ -71,11 +70,11 @@
                         <div class="col-lg-6 text-center text-lg-start">
                             <h1 class="text-white mb-4 animated zoomIn">Sistem Informasi Data Prestasi Siswa SMA Negeri Bandarkedungmulyo Jombang</h1>
                             <p class="text-white pb-3 animated zoomIn">Sistem informasi ini memberikan akses transparan terhadap pencapaian prestasi siswa yang dapat memungkinkan pihak luar, orang tua maupun guru untuk mengetahui track records pencapaian siswa siswi SMA Negeri Bandarkedubgmulyo Jombang dengan mudah</p>
-                           
+
                             <a href="{{route('login')}}" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Sign in</a>
                         </div>
                         <div class="col-lg-6 text-center text-lg-start">
-                            <img class="img-fluid" src="/adminlte/dist/img/beranda.png"alt=""style="width: 500px; height: 300px;">
+                            <img class="img-fluid" src="/adminlte/dist/img/beranda.png" alt="" style="width: 500px; height: 300px;">
                         </div>
                     </div>
                 </div>
@@ -97,8 +96,8 @@
                         <div class="service-item d-flex flex-column justify-content-center text-center rounded">
                             <!-- <div class="service-icon flex-shrink-0">
                                 </div> -->
-                                <!-- <i class="fa fa-home fa-2x"></i> -->
-                                <img src="/prestasi/{{$row->bukti}}" alt="user-avatar" class="img-circle img-fluid">
+                            <!-- <i class="fa fa-home fa-2x"></i> -->
+                            <img src="/prestasi/{{$row->bukti}}" alt="user-avatar" class="img-circle img-fluid">
                             <h5 class="mb-3">{{$row->nama_siswa}}-{{$row->judul}}</h5>
                             <p>{{$row->penyelenggara}}</p>
                             <!-- <a class="btn px-3 mt-auto mx-auto" href="">Read More</a> -->
@@ -108,7 +107,7 @@
                 </div>
             </div>
         </div>
-        <!-- Service End -->        
+        <!-- Service End -->
 
         <!-- Footer Start -->
         <!-- <div class="container-fluid bg-primary text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s"> -->
@@ -128,17 +127,17 @@
                             <!-- <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a> -->
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
             <div class="container px-lg-5">
                 <div class="copyright">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">sippres</a>, All Right Reserved. 
-							
-							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                            &copy; <a class="border-bottom" href="#">sippres</a>, All Right Reserved.
+
+                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                            Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
                         </div>
                     </div>
                 </div>

@@ -31,35 +31,37 @@ class siswalprofilecontroller extends Controller
     }
 
 
-    public function insertkeaktifan(Request $request)
+    public function editpwd(Request $request)
     {
-        // dd($request);
-        $request->validate([
-            'namakegiatan'    =>  'required',
-            'waktu'         =>  'required',
-            'penyelenggara'  =>  'required',
-            // 'foto'         =>  'required',
-        ], [
-            'namakegiatan.required' => 'nama kegiatan tidak boleh kosong',
-            'waktu.required' => 'waktu tidak boleh kosong',
-            'penyelenggara.required' => 'penyelenggara tidak boleh kosong',
-            // 'foto.required' => 'foto tidak boleh kosong',
-        ]);
-        // return;
+        $pwdnew = Hash::make($request->password);
+        $id = auth()->user()->id;
+        DB::update("UPDATE users SET password=? WHERE id = ? ", [$pwdnew, $id]);
+        return redirect()->route('profilesiswa')->with('success', 'Password berhasil diupdate');
+    }
+
+    public function editfoto(Request $request)
+    {
+
+        $destinationPath = 'images/';
+        $input = $request->all();
         if ($image = $request->file('foto')) {
-            $destinationPath = 'keaktifan/';
             $file_name = $this->sekarang . '.' . request()->foto->getClientOriginalExtension();
             $image->move($destinationPath, $file_name);
-            $foto = $file_name;
-        }
-        $input = $request->all();
-        $namakegiatan = $input["namakegiatan"];
-        $waktu = $input["waktu"];
-        $penyelenggara = $input["penyelenggara"];
-        $fotoo = $foto ?? "";
 
-        DB::insert("INSERT INTO keaktifan(isverif, nama_kegiatan, waktu, foto, penyelenggara) VALUES (?,?,?,?,?)", [0, $namakegiatan, $waktu, $fotoo, $penyelenggara]);
-        return redirect()->route('ajuankeaktifan')->with('success', 'Data berhasil dimasukkan');
+            if ($request->fotoo !== "profile.jpg") {
+                $pathimgold = $destinationPath . $request->fotoo;
+                if (file_exists($pathimgold)) {
+                    @unlink($pathimgold);
+                }
+            }
+            $foto = $file_name;
+        } else {
+            unset($foto);
+        };
+        $fotoo = $foto ?? $input["fotoo"];
+        $id = $input["iddata"];
+        DB::update("UPDATE siswa SET foto=? WHERE id_siswa = ? ", [$fotoo, $id]);
+        return redirect()->route('profilesiswa')->with('success', 'Password berhasil diupdate');
     }
 
     public function updatekeaktifan(Request $request)
