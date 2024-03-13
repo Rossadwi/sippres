@@ -54,8 +54,9 @@ class adminlsiswacontroller extends Controller
         $alamat = $input["alamat"];
         $telp = $input["telp"];
         $fotoo = $foto ?? 'profile.jpg';
+        $password = "$2y$12$7xX4kCMJ//s0qlNtvIZ4ZecgDfEHVZXF.drhpnwiyV6w.d2QIQ3eK";  //passdefault : 1234
         DB::insert("INSERT INTO siswa(NISN,nama_siswa,jurusan,angkatan,alamat,telp,foto) VALUES (?,?,?,?,?,?,?)", [$NISN, $nama_siswa, $jurusan, $angkatan, $alamat, $telp, $fotoo]);
-
+        DB::insert("INSERT INTO users(name,username,password,role) VALUES (?,?,?,?)", [$nama_siswa,$NISN,$password, 0]);
         return redirect()->route('getsiswa')->with('success', 'Data berhasil dimasukkan');
     }
     public function updatesiswa(Request $request)
@@ -104,8 +105,13 @@ class adminlsiswacontroller extends Controller
     }
     public function deletesiswa(Request $request)
     {
+        
+        $all = json_decode($request->dtal);
         $id = $request->id;
-        $foto = $request->foto;
+        // $siswa = DB::select("select * from siswa where id_siswa = ?", [$id]);
+        // var_dump($siswa[0]->NISN);
+        // return;
+        $foto = $all->foto;
         $destinationPath = 'images/';
         if ($foto !== "profile.jpg") {
             $pathimgold = $destinationPath.$foto;
@@ -114,6 +120,7 @@ class adminlsiswacontroller extends Controller
                 }
         }
         DB::delete("delete from siswa where id_siswa = ?", [$id]);
+        DB::delete("delete from users where username = ?", [$all->NISN]);
         return redirect()->route('getsiswa')->with('success', 'Data berhasil didelete');
     }
 }

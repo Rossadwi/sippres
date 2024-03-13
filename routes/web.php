@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [landingpagecontroller::class,'getdata']);
 // Route::get('/', function () {
+//     // echo hash::make('1234');
 //     return view('landing/index');
 // });
 

@@ -45,6 +45,7 @@
                                 <tr>
                                     <th>id</th>
                                     <th>name</th>
+                                    <th>username</th>
                                     <th>email</th>
                                     <th>role</th>
                                     <th>action</th>
@@ -55,6 +56,7 @@
                                 <tr>
                                     <td>{{$row->id}}</td>
                                     <td>{{$row->name}}</td>
+                                    <td>{{$row->username}}</td>
                                     <td>{{$row->email}}</td>
                                     <td>{{$row->role}}</td>
                                     <td>
@@ -101,6 +103,12 @@
                         <label class="col-lg-2 control-label">Name</label>
                         <div class="col-lg-12">
                             <input type="text" name="name" placeholder="name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Username</label>
+                        <div class="col-lg-12">
+                            <input type="text" name="username" placeholder="username" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -152,6 +160,12 @@
                         <div class="col-lg-12">
                             <input type="hidden" name="iddata" class="form-control" id="iddata">
                             <input type="text" name="name" placeholder="name" class="form-control" id="name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Username</label>
+                        <div class="col-lg-12">
+                            <input type="text" name="username" placeholder="username" class="form-control" id="username">
                         </div>
                     </div>
                     <div class="form-group">
@@ -259,6 +273,7 @@
             $('#iddata').val(id);
             $('#name').val(dataall.name);
             $('#email').val(dataall.email);
+            $('#username').val(dataall.username);
             $('#passwordd').val(dataall.password);
             $('#role').val(dataall.role);
             // console.log(dataall.id);

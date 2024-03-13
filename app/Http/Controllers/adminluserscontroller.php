@@ -19,11 +19,13 @@ class adminluserscontroller extends Controller
     {
         $request->validate([
             'name'          =>  'required',
+            'username'      => 'required',
             'email'         =>  'required|email',
             'password'         =>  'required',
             'role'         =>  'required',
         ],[
             'name.required' => 'nama tidak boleh kosong',
+            'username.required' => 'username tidak boleh kosong',
             'email.required' => 'email tidak boleh kosong',
             'email.email' => 'email tidak valid',
             'password.required' => 'password tidak boleh kosong',
@@ -31,10 +33,11 @@ class adminluserscontroller extends Controller
         ]);
         $input = $request->all();
         $name = $input["name"];
+        $username = $input["username"];
         $email = $input["email"];
         $password = Hash::make($input["password"]);
         $role = $input["role"];
-        DB::insert("INSERT INTO users(name,email,password,role) VALUES (?,?,?,?)", [$name, $email, $password, $role]);
+        DB::insert("INSERT INTO users(name,username,email,password,role) VALUES (?,?,?,?)", [$name,$username, $email, $password, $role]);
 
         return redirect()->route('getusers')->with('success', 'Data berhasil dimasukkan');
     }
@@ -42,10 +45,12 @@ class adminluserscontroller extends Controller
     {
         $request->validate([
             'name'          =>  'required',
+            'username'      => 'required',
             'email'         =>  'required|email',
             'role'         =>  'required',
         ],[
             'name.required' => 'nama tidak boleh kosong',
+            'username.required' => 'Username tidak boleh kosong',
             'email.required' => 'email tidak boleh kosong',
             'email.email' => 'email tidak valid',
             'role.required' => 'role tidak boleh kosong' 
@@ -53,10 +58,11 @@ class adminluserscontroller extends Controller
         $input = $request->all();
         $id = $input["iddata"];
         $name = $input["name"];
+        $username = $input["username"];
         $email = $input["email"];
         $password = $input["password"] ? Hash::make($input["password"]) : $input["passwordd"];
         $role = $input["role"];
-        DB::update("UPDATE users SET name=?,email=?,password=?,role=? WHERE id = ? ", [$name, $email, $password, $role, $id]);
+        DB::update("UPDATE users SET name=?,usermame=?,email=?,password=?,role=? WHERE id = ? ", [$name, $username, $email, $password, $role, $id]);
 
         return redirect()->route('getusers')->with('success', 'Data berhasil diupdate');
     }

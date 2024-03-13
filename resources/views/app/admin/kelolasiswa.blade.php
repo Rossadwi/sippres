@@ -70,6 +70,8 @@
                                             @csrf
                                             @method('DELETE')
                                             <input type="hidden" name="id" value="{{ $row->id_siswa }}">
+                                            <input type="hidden" name="dtal" value="{{ json_encode($row)}}">
+
                                             <a data-id="{{ $row->id_siswa }}" data-all="{{json_encode($row)}}" class="btn btn-sm btn-warning edit" data-toggle="modal" data-target="#modal-edit" style="color: white;"><i class="bi bi-pencil-square"></i>EDIT</a>
                                             <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
                                         </form>
@@ -130,6 +132,12 @@
                         <label class="col-lg-2 control-label">Angkatan</label>
                         <div class="col-lg-12">
                             <input type="text" name="angkatan" placeholder="angkatan" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Alamat</label>
+                        <div class="col-lg-12">
+                            <input type="text" name="alamat" placeholder="alamat" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
