@@ -64,17 +64,17 @@
                 </div>
             </nav>
 
-            <div class="container-xxl py-5 hero-header mb-5" style="background-color:#02adef;">
+            <div class="container-xxl py-5 hero-header mb-5" style="background-color:#2628b2;">
                 <div class="container my-5 py-5 px-lg-5">
                     <div class="row g-5 py-5">
                         <div class="col-lg-6 text-center text-lg-start">
                             <h1 class="text-white mb-4 animated zoomIn">Sistem Informasi Data Prestasi Siswa SMA Negeri Bandarkedungmulyo Jombang</h1>
-                            <p class="text-white pb-3 animated zoomIn">Sistem informasi ini memberikan akses transparan terhadap pencapaian prestasi siswa yang dapat memungkinkan pihak luar, orang tua maupun guru untuk mengetahui track records pencapaian siswa siswi SMA Negeri Bandarkedubgmulyo Jombang dengan mudah</p>
+                            <p class="text-white pb-3 animated zoomIn">Sistem informasi ini memberikan akses transparan terhadap pencapaian prestasi siswa yang dapat memungkinkan pihak luar, orang tua maupun guru untuk mengetahui track records pencapaian siswa siswi SMA Negeri Bandarkedungmulyo Jombang dengan mudah</p>
 
                             <a href="{{route('login')}}" class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Sign in</a>
                         </div>
-                        <div class="col-lg-6 text-center text-lg-start">
-                            <img class="img-fluid" src="/adminlte/dist/img/beranda.png" alt="" style="width: 500px; height: 300px;">
+                        <div class="col-lg-5 text-center text-lg-start">
+                            <img class="" src="/adminlte/dist/img/beranda2.png" alt="" style="width: 580px; height: 330px;">
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
             <div class="container px-lg-5">
                 <div class="section-title position-relative text-center mb-5 pb-2 wow fadeInUp" data-wow-delay="0.1s">
                     <!-- <h6 class="position-relative d-inline text-primary ps-4">Our Services</h6> -->
-                    <h2 class="mt-4">Daftar Prestasi Terbaru</h2>
+                    <h2 class="mt-4">Daftar Capaian Prestasi Siswa</h2>
                 </div>
                 <div class="row g-4">
                     @foreach(json_decode($data) as $row)
@@ -111,7 +111,7 @@
 
         <!-- Footer Start -->
         <!-- <div class="container-fluid bg-primary text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s"> -->
-        <div class="container-fluid text-light footer wow fadeIn" style="background-color:#02adef;" data-wow-delay="0.1s">
+        <div class="container-fluid text-light footer wow fadeIn" style="background-color:#2628b2;" data-wow-delay="0.1s">
             <div class="container py-5 px-lg-5">
                 <div class="row">
                     <div class="col-md-6 col-lg-12">
