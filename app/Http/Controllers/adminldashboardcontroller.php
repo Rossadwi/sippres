@@ -28,7 +28,7 @@ class adminldashboardcontroller extends Controller
             'totalpresverif' => $datapresverif[0]->total,
             'totalaktifverif' => $dataaktifverif[0]->total,
             'totalinfolomba' => $datainfolomba[0]->total,
-            'totalsiswa' => $datainfolomba[0]->total
+            'totalsiswa' => $datasiswa[0]->total
         ];
         return view('app/admin/dashboard', ['all'=>$all]);
     }

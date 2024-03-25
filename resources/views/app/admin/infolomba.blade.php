@@ -48,7 +48,8 @@
                                     <th>Penyelenggara</th>
                                     <th>Deskripsi</th>
                                     <th>Foto</th>
-                                    <th>Waktu</th>
+                                    <th>Pelaksanaan</th>
+                                    <th>Panduan</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -60,7 +61,8 @@
                                     <td>{{$row->penyelenggara}}</td>
                                     <td>{{$row->deskripsi}}</td>
                                     <td><img src="/poster/{{$row->foto}}" width="75" alt="$row->foto"></td>
-                                    <td>{{$row->waktu}}</td>
+                                    <td>{{$row->waktu_daftar}} sampai {{$row->waktu_tutup}}</td>
+                                    <td><a href="{{$row->panduan}}"target="_blank">Link Panduan</a></td>
                                     <td>
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('deletinfolomba') }}" method="post">
                                             @csrf
@@ -120,9 +122,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Waktu</label>
+                        <label class="col-lg-5 control-label">Waktu Pendaftaran</label>
                         <div class="col-lg-12">
-                            <input type="Date" name="waktu" placeholder="waktu" class="form-control">
+                            <input type="Date" name="waktu_daftar" placeholder="waktu" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-5 control-label">Waktu Penutupan</label>
+                        <div class="col-lg-12">
+                            <input type="Date" name="waktu_tutup" placeholder="waktu" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -137,6 +145,12 @@
                                 <input type="file" class="custom-file-input" id="customFile" name="foto">
                                 <label class="custom-file-label" for="customFile">Choose file</label>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Panduan</label>
+                        <div class="col-lg-12">
+                            <input type="text" name="panduan" placeholder="panduan" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -186,11 +200,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-lg-2 control-label">Waktu</label>
+                                <label class="col-lg-5 control-label">Waktu Pendaftaran</label>
                                 <div class="col-lg-12">
-                                    <input type="Date" name="waktu" placeholder="waktu" class="form-control" id="waktu">
+                                    <input type="Date" name="waktu_daftar" placeholder="waktu" class="form-control" id="waktu_daftar">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-lg-5 control-label">Waktu Penutupan</label>
+                                <div class="col-lg-12">
+                                    <input type="Date" name="waktu_tutup" placeholder="waktu" class="form-control" id="waktu_tutup">
+                                </div>
+                             </div>
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">Foto</label>
                                 <div class="col-lg-12">
@@ -200,6 +220,12 @@
                                     </div>
                                     <!-- <input type="file" name="foto" /> -->
                                     <input type="hidden" name="fotoo" class="form-control" id="fotoo">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Panduan</label>
+                                <div class="col-lg-12">
+                                    <input type="text" name="panduan" placeholder="Masukkan link panduan" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -291,7 +317,9 @@
             $('#namalomba').val(dataall.nama_lomba);
             $('#penyelenggara').val(dataall.penyelenggara);
             $('#deskripsi').val(dataall.deskripsi);
-            $('#waktu').val(dataall.waktu);
+            $('#waktu_daftar').val(dataall.waktu_daftar);
+            $('#waktu_tutup').val(dataall.waktu_tutup);
+            $('#panduan').val(dataall.panduan);
             document.getElementById('foto').src = "/poster/" + dataall.foto;
         });
 

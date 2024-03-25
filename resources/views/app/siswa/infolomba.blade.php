@@ -61,7 +61,8 @@
                                         {{$row->deskripsi}}
                                     </p>
                                     <p class="text-muted text-sm">
-                                        <b>Pelaksanaan: </b> {{$row->waktu}}
+                                        <b>Waktu Pendaftaran:</b>{{$row->waktu_daftar}} <br></br>
+                                        <b>Waktu Penutupan:</b>{{$row->waktu_tutup}}
                                     </p>
                                     <!-- <ul class="ml-4 mb-0 fa-ul text-muted">
                                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>
@@ -156,9 +157,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-12 control-label">Waktu Pelaksanaan</label>
+                            <label class="col-lg-5 control-label">Waktu Pendaftaran</label>
                             <div class="col-lg-12">
-                                <input type="date" name="waktupelaksanaan" placeholder="Waktu Pelaksanaan" class="form-control" id="vwaktupelaksanaan" disabled>
+                                <input type="Date" name="waktu_daftar" placeholder="waktu" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-5 control-label">Waktu Penutupan</label>
+                            <div class="col-lg-12">
+                                <input type="Date" name="waktu_tutup" placeholder="waktu" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -186,7 +193,8 @@
             $('#vnamalomba').val(dataall.nama_lomba);
             $('#vpenyelenggara').val(dataall.penyelenggara);
             $('#deskripsi').val(dataall.deskripsi);
-            $('#vwaktupelaksanaan').val(dataall.waktu);
+            $('#waktu_daftar').val(dataall.waktu_daftar);
+            $('#waktu_tutup').val(dataall.waktu_tutup);
             document.getElementById('vbuktifoto').src = "/poster/" + dataall.foto;
             // console.log(dataall.id);
         });

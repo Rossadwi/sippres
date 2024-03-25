@@ -33,12 +33,14 @@ class siswalinfolombacontroller extends Controller
             'nama_lomba'         =>  'required',
             'penyelenggara'         =>  'required',
             'deskripsi'         =>  'required',
-            'waktu'         =>  'required'
+            'waktu_daftar'         =>  'required',
+            'waktu_tutup'         =>  'required'
         ], [
             'nama_lomba.required' => 'nama lomba tidak boleh kosong',
             'penyelenggara.required' => 'penyelenggara tidak boleh kosong',
             'deskripsi.required' => 'deskripsi tidak boleh kosong',
-            'waktu.required' => 'waktu tidak boleh kosong'
+            'waktu_daftar.required' => 'waktu daftar tidak boleh kosong',
+            'waktu_tutup.required' => 'waktu tutup tidak boleh kosong'
         ]);
         if ($image = $request->file('foto')) {
             $destinationPath = 'poster/';
@@ -50,9 +52,8 @@ class siswalinfolombacontroller extends Controller
         $nama_lomba = $input["nama_lomba"];
         $penyelenggara = $input["penyelenggara"];
         $deskripsi = $input["deskripsi"];
-        $waktu = $input["waktu"];
         $fotoo = $foto ?? 'profile.png';
-        DB::insert("INSERT INTO infolomba(nama_lomba,penyelenggara,deskripsi,foto,waktu) VALUES (?,?,?,?,?)", [$nama_lomba, $penyelenggara, $deskripsi, $fotoo, $waktu]);
+        DB::insert("INSERT INTO infolomba(nama_lomba,penyelenggara,deskripsi,foto,waktu_daftar,waktu_tutup) VALUES (?,?,?,?,?,?,?)", [$nama_lomba, $penyelenggara, $deskripsi, $fotoo, $waktu]);
 
         return redirect()->route('getinfolomba')->with('success', 'Data berhasil dimasukkan');
     }
@@ -88,10 +89,9 @@ class siswalinfolombacontroller extends Controller
         $nama_lomba = $input["nama_lomba"];
         $penyelenggara = $input["penyelenggara"];
         $deskripsi = $input["deskripsi"];
-        $waktu = $input["waktu"];
         $fotoo = $foto ?? $input["fotoo"];
         $id = $input["iddata"];
-        DB::update("UPDATE infolomba SET nama_lomba=?,penyelenggara=?,deskripsi=?,foto=?,waktu=? WHERE id_infolomba = ? ", [$nama_lomba, $penyelenggara, $deskripsi, $fotoo, $waktu, $id]);
+        DB::update("UPDATE infolomba SET nama_lomba=?,penyelenggara=?,deskripsi=?,foto=?,waktu_daftar=?,waktu_tutup=? WHERE id_infolomba = ? ", [$nama_lomba, $penyelenggara, $deskripsi, $fotoo, $id]);
         return redirect()->route('getinfolomba')->with('success', 'Data berhasil diupdate');
     }
     public function deletelomba(Request $request)
