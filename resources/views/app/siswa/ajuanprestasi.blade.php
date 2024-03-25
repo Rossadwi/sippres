@@ -320,12 +320,31 @@
                 //         columns: [0, 1, 2, 3] // Kolom id, name, email,role
                 //     }
 
-                // }, {
-                //     extend: "pdf",
-                //     exportOptions: {
-                //         columns: [0, 1, 2, 3] // Kolom id, name, email,role
-                //     }
-                // }, {
+                // }, 
+
+                {
+                    extend: "pdf",
+                    exportOptions: {
+                        columns: [0, 1, 3, 4, 5, 6], // Kolom id, name, email,role
+                        customizeData: function(data) {
+                            let statusColumnIndex = data.header.findIndex(column => column.text === 'status');
+                            // console.log(statusColumnIndex);
+                            // Filter data berdasarkan kolom ke-5 (indeks 4) bernilai "terverifikasi"
+                            // let filteredData = data.body.filter(function(row) {
+                                // return row.data["Di"] == "Diterima";
+                                // console.log(row.data);
+                            // });
+
+                            // console.log(filteredData);
+                            // // Mengganti body data dengan data yang telah difilter
+                            // data.body = filteredData;
+
+                            // return data;
+                        }
+                    }
+                },
+
+                //{
                 //     extend: "print",
                 //     exportOptions: {
                 //         columns: [0, 1, 2, 3] // Kolom id, name, email,role

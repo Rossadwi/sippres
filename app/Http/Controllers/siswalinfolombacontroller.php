@@ -20,7 +20,7 @@ class siswalinfolombacontroller extends Controller
 
     public function getinfolomba()
     {
-        $data = DB::table('infolomba')->orderBy('createddate', 'DESC')->paginate(10);
+        $data = DB::table('infolomba')->orderBy('createddate', 'DESC')->paginate(3);
         // $data = DB::select("SELECT * FROM infolomba ORDER BY createddate DESC");
         // $newjsondata = json_encode($data);
         return view('app/siswa/infolomba', ['data' => $data]);

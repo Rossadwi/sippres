@@ -20,10 +20,14 @@ class landingpagecontroller extends Controller
 
     public function getdata()
     {
-        $dataverif = DB::select("select * from vprestasi where isverif = 1 order by updateat desc;");
-        $newjsondataverif = json_encode($dataverif);
+        // $dataverif = DB::select("select * from vprestasi where isverif = 1 order by updateat desc;");
+        $data = DB::table('vprestasi')->where('isverif',"=",1)->orderBy('updateat', 'DESC')->paginate(3);
+        // $data = DB::select("SELECT * FROM infolomba ORDER BY createddate DESC");
+        // $newjsondata = json_encode($data);
+        // return view('app/siswa/infolomba', ['data' => $data]);
+        // $newjsondataverif = json_encode($dataverif);
         // return $newjsondataverif;
-        return view('landing/index', ['data' => $newjsondataverif]);
+        return view('landing/index', ['data' => $data]);
     }
 
 

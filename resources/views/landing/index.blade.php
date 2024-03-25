@@ -91,7 +91,7 @@
                     <h2 class="mt-4">Capaian Prestasi Siswa</h2>
                 </div>
                 <div class="row g-4">
-                    @foreach(json_decode($data) as $row)
+                    @foreach($data as $row)
                     <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
                         <div class="service-item d-flex flex-column justify-content-center text-center rounded">
                             <!-- <div class="service-icon flex-shrink-0">
@@ -104,6 +104,30 @@
                         </div>
                     </div>
                     @endforeach
+                    <nav aria-label="Page navigation example Right" >
+                        <ul class="pagination justify-content-end">
+                            <!-- {{json_encode($data)}} -->
+                            @if ($data->onFirstPage())
+                            <li class="page-item disabled">
+                                <span class="page-link">&laquo; Previous</span>
+                            </li>
+                            @else
+                            <li class="page-item">
+                                <a href="{{ $data->previousPageUrl() }}" class="page-link">&laquo; Previous</a>
+                            </li>
+                            @endif
+        
+                            @if ($data->nextPageUrl())
+                            <li class="page-item">
+                                <a href="{{ $data->nextPageUrl() }}" class="page-link">Next &raquo;</a>
+                            </li>
+                            @else
+                            <li class="page-item disabled">
+                                <span class="page-link">Next &raquo;</span>
+                            </li>
+                            @endif
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>

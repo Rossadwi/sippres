@@ -55,8 +55,16 @@
                         </div>
                         <div class="card-body pt-0">
                             <div class="row">
-                                <div class="col-7">
-                                    <h2 class="lead"><b>{{$row->penyelenggara}}</b></h2>
+                                <div class="col-12">
+                                    
+                                    <div class="row">
+                                        <div class="col">
+                                            <h2 class="lead"><b>{{$row->penyelenggara}}</b></h2>
+                                        </div>
+                                            <div class="col-5 text-center">
+                                                <img src="/poster/{{$row->foto}}" alt="user-avatar" class="img-circle img-fluid">
+                                            </div>
+                                    </div>
                                     <p class="text-muted text-sm">
                                         {{$row->deskripsi}}
                                     </p>
@@ -68,9 +76,6 @@
                                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>
                                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: + 800 - 12 12 23 52</li>
                                     </ul> -->
-                                </div>
-                                <div class="col-5 text-center">
-                                    <img src="/poster/{{$row->foto}}" alt="user-avatar" class="img-circle img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -159,13 +164,13 @@
                         <div class="form-group">
                             <label class="col-lg-5 control-label">Waktu Pendaftaran</label>
                             <div class="col-lg-12">
-                                <input type="Date" name="waktu_daftar" placeholder="waktu" class="form-control">
+                                <input type="Date" id="waktu_daftar" name="waktu_daftar" placeholder="waktu" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-5 control-label">Waktu Penutupan</label>
                             <div class="col-lg-12">
-                                <input type="Date" name="waktu_tutup" placeholder="waktu" class="form-control">
+                                <input type="Date" id="waktu_tutup" name="waktu_tutup" placeholder="waktu" class="form-control">
                             </div>
                         </div>
                     </div>
