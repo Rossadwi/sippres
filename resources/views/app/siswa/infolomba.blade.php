@@ -65,7 +65,14 @@
                                                 <img src="/poster/{{$row->foto}}" alt="user-avatar" class="img-circle img-fluid">
                                             </div>
                                     </div>
-                                    <p class="text-muted text-sm">
+                                    <style>
+                                        .text-ellipsis {
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            white-space: nowrap;
+                                        }
+                                    </style>
+                                    <p class="text-muted text-sm text-ellipsis">
                                         {{$row->deskripsi}}
                                     </p>
                                     <p class="text-muted text-sm">

@@ -338,92 +338,92 @@
 
                 // }, 
 
-                {
-                    extend: "pdf",
-                    title: '',
-                    exportOptions: {
-                        columns: [0, 1, 3, 4, 5], // Kolom id, name, email,role
-                        customizeData: function(data) {
-                            // console.log(data.header[4]);
-                            let statusColumnIndex = data.header[4];
-                            let filteredData = data.body.filter(function(row) {
-                                // console.log(row[4] == "Diterima");
-                                return row[4] !== "Diterima";
-                                // console.log(row.data[statusColumnIndex] == "Diterima");
-                            });
-                            // console.log(filteredData);
-                            // Mengganti body data dengan data yang telah difilter
-                            data.body = filteredData;
+                // {
+                //     extend: "pdf",
+                //     title: '',
+                //     exportOptions: {
+                //         columns: [0, 1, 3, 4, 5], // Kolom id, name, email,role
+                //         customizeData: function(data) {
+                //             // console.log(data.header[4]);
+                //             let statusColumnIndex = data.header[4];
+                //             let filteredData = data.body.filter(function(row) {
+                //                 // console.log(row[4] == "Diterima");
+                //                 return row[4] !== "Diterima";
+                //                 // console.log(row.data[statusColumnIndex] == "Diterima");
+                //             });
+                //             // console.log(filteredData);
+                //             // Mengganti body data dengan data yang telah difilter
+                //             data.body = filteredData;
 
-                            return data;
-                        },
-                    },
-                    customize: function(doc) {
-                        // Menambahkan teks atau elemen tambahan ke dalam PDF
-                        // doc.content[1].text = 'Daftar Pengguna Diterima'; // Mengganti judul PDF
+                //             return data;
+                //         },
+                //     },
+                //     customize: function(doc) {
+                //         // Menambahkan teks atau elemen tambahan ke dalam PDF
+                //         // doc.content[1].text = 'Daftar Pengguna Diterima'; // Mengganti judul PDF
 
-                        // Menambahkan header
-                        doc.header = function(currentPage, pageCount, pageSize) {
-                            // Membuat sebuah div untuk header
-                            let headerContainer = document.createElement('div');
-                            headerContainer.style.textAlign = 'center';
+                //         // Menambahkan header
+                //         doc.header = function(currentPage, pageCount, pageSize) {
+                //             // Membuat sebuah div untuk header
+                //             let headerContainer = document.createElement('div');
+                //             headerContainer.style.textAlign = 'center';
 
-                            // Menambahkan logo
-                            let logoImg = new Image();
-                            logoImg.src = '/adminlte/dist/img/sippreslogo.png';
-                            logoImg.width = 100; // Atur lebar gambar menjadi 200 piksel
-                            logoImg.height = 100;
-                            // logoImg.src = '/path/to/logo.png'; // Ganti dengan URL logo Anda
-                            // logoImg.style.width = '100px'; // Atur lebar logo
-                            // logoImg.style.height = 'auto'; // Atur tinggi logo agar proporsional
-                            headerContainer.appendChild(logoImg);
+                //             // Menambahkan logo
+                //             let logoImg = new Image();
+                //             logoImg.src = '/adminlte/dist/img/sippreslogo.png';
+                //             logoImg.width = 100; // Atur lebar gambar menjadi 200 piksel
+                //             logoImg.height = 100;
+                //             // logoImg.src = '/path/to/logo.png'; // Ganti dengan URL logo Anda
+                //             // logoImg.style.width = '100px'; // Atur lebar logo
+                //             // logoImg.style.height = 'auto'; // Atur tinggi logo agar proporsional
+                //             headerContainer.appendChild(logoImg);
 
-                            // Menambahkan nama perusahaan
-                            let companyName = document.createElement('h3');
-                            companyName.textContent = "SMAN BANDAR KEDUNG MULYO"; // Ganti dengan nama perusahaan Anda
-                            headerContainer.appendChild(companyName);
+                //             // Menambahkan nama perusahaan
+                //             let companyName = document.createElement('h3');
+                //             companyName.textContent = "SMAN BANDAR KEDUNG MULYO"; // Ganti dengan nama perusahaan Anda
+                //             headerContainer.appendChild(companyName);
 
-                            // Mengembalikan elemen header
-                            return headerContainer;
-                        };
+                //             // Mengembalikan elemen header
+                //             return headerContainer;
+                //         };
 
-                        // Menambahkan footer
-                        doc.footer = function(page, pages) {
-                            return {
-                                text: 'Halaman ' + page.toString() + ' dari ' + pages.toString(),
-                                alignment: 'center',
-                                fontSize: 10
-                            };
-                        };
-                        // Mengatur gaya atau tata letak elemen
-                        // Misalnya, mengubah warna teks
-                        doc.styles.tableBodyEven.fillColor = '#DDEEFF';
-                        doc.styles.tableBodyOdd.fillColor = '#FFFFFF';
-                        doc.content[0].table.widths = ['*', '*', '*', '*', '*'];
-                        doc.content[0].table.body.forEach(function(row) {
-                            row.forEach(function(cell) {
-                                cell.alignment = 'center'; // Mengatur alignment seluruh sel dalam tabel menjadi tengah
-                            });
-                        });
-                        doc.content[0].layout = {
-                            hLineWidth: function(i, node) {
-                                return (i === 0 || i === node.table.body.length) ? 2 : 1; // Mengatur ketebalan garis horizontal
-                            },
-                            vLineWidth: function(i, node) {
-                                return (i === 0 || i === node.table.widths.length) ? 2 : 1; // Mengatur ketebalan garis vertikal
-                            },
-                            hLineColor: function(i, node) {
-                                return 'black'; // Mengatur warna garis horizontal
-                            },
-                            vLineColor: function(i, node) {
-                                return 'black'; // Mengatur warna garis vertikal
-                            },
-                            fillColor: function(i, node) {
-                                return (i % 2 === 0) ? '#DDEEFF' : '#FFFFFF'; // Mengatur warna latar belakang setiap baris
-                            }
-                        };
-                    }
-                },
+                //         // Menambahkan footer
+                //         doc.footer = function(page, pages) {
+                //             return {
+                //                 text: 'Halaman ' + page.toString() + ' dari ' + pages.toString(),
+                //                 alignment: 'center',
+                //                 fontSize: 10
+                //             };
+                //         };
+                //         // Mengatur gaya atau tata letak elemen
+                //         // Misalnya, mengubah warna teks
+                //         doc.styles.tableBodyEven.fillColor = '#DDEEFF';
+                //         doc.styles.tableBodyOdd.fillColor = '#FFFFFF';
+                //         doc.content[0].table.widths = ['*', '*', '*', '*', '*'];
+                //         doc.content[0].table.body.forEach(function(row) {
+                //             row.forEach(function(cell) {
+                //                 cell.alignment = 'center'; // Mengatur alignment seluruh sel dalam tabel menjadi tengah
+                //             });
+                //         });
+                //         doc.content[0].layout = {
+                //             hLineWidth: function(i, node) {
+                //                 return (i === 0 || i === node.table.body.length) ? 2 : 1; // Mengatur ketebalan garis horizontal
+                //             },
+                //             vLineWidth: function(i, node) {
+                //                 return (i === 0 || i === node.table.widths.length) ? 2 : 1; // Mengatur ketebalan garis vertikal
+                //             },
+                //             hLineColor: function(i, node) {
+                //                 return 'black'; // Mengatur warna garis horizontal
+                //             },
+                //             vLineColor: function(i, node) {
+                //                 return 'black'; // Mengatur warna garis vertikal
+                //             },
+                //             fillColor: function(i, node) {
+                //                 return (i % 2 === 0) ? '#DDEEFF' : '#FFFFFF'; // Mengatur warna latar belakang setiap baris
+                //             }
+                //         };
+                //     }
+                // },
 
                 {
                     extend: "print",
