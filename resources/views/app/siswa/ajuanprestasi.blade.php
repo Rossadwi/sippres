@@ -9,6 +9,22 @@
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="/adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+<style>
+    @media print {
+
+        html,
+        body {
+            height: auto;
+        }
+
+        .dt-print-table,
+        .dt-print-table thead,
+        .dt-print-table th,
+        .dt-print-table tr {
+            border: 0 none !important;
+        }
+    }
+</style>
 
 @endprepend
 
@@ -42,7 +58,7 @@
                     </div>
 
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="example1" class="table table-bordered table-striped display" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>judul</th>
@@ -325,31 +341,116 @@
                 {
                     extend: "pdf",
                     exportOptions: {
-                        columns: [0, 1, 3, 4, 5, 6], // Kolom id, name, email,role
+                        columns: [0, 1, 3, 4, 5], // Kolom id, name, email,role
                         customizeData: function(data) {
-                            let statusColumnIndex = data.header.findIndex(column => column.text === 'status');
-                            // console.log(statusColumnIndex);
-                            // Filter data berdasarkan kolom ke-5 (indeks 4) bernilai "terverifikasi"
-                            // let filteredData = data.body.filter(function(row) {
-                                // return row.data["Di"] == "Diterima";
-                                // console.log(row.data);
-                            // });
-
+                            // console.log(data.header[4]);
+                            let statusColumnIndex = data.header[4];
+                            let filteredData = data.body.filter(function(row) {
+                                // console.log(row[4] == "Diterima");
+                                return row[4] == "Diterima";
+                                // console.log(row.data[statusColumnIndex] == "Diterima");
+                            });
                             // console.log(filteredData);
-                            // // Mengganti body data dengan data yang telah difilter
-                            // data.body = filteredData;
+                            // Mengganti body data dengan data yang telah difilter
+                            data.body = filteredData;
 
-                            // return data;
+                            return data;
+                        },
+                        customize: function(doc) {
+                            // console.log(doc);
+                            // // Mengatur lebar kolom
+                            doc.autoTable.setColumnWidth(0, 150); // Kolom 0 (ID) memiliki lebar 50
+                            doc.autoTable.setColumnWidth(1, 100); // Kolom 1 (Nama) memiliki lebar 100
+                            doc.autoTable.setColumnWidth(2, 50); // Kolom 2 (Email) memiliki lebar 150
+                            doc.autoTable.setColumnWidth(3, 80); // Kolom 3 (Peran) memiliki lebar 80
+                            doc.autoTable.setColumnWidth(4, 80); // Kolom 4 (Status) memiliki lebar 80
+
+                            // // Mengatur opsi lainnya jika diperlukan
                         }
                     }
                 },
 
-                //{
-                //     extend: "print",
-                //     exportOptions: {
-                //         columns: [0, 1, 2, 3] // Kolom id, name, email,role
-                //     }
-                // }, "colvis",
+                {
+                    extend: "print",
+                    title: '',
+                    customize: function(win) {
+                        // Menghapus elemen h1 (judul) dari dokumen
+                        // $(win.document.body).find('h1').remove();
+
+                        // Mengakses dokumen yang akan dicetak
+                        let doc = win.document;
+
+                        // Membuat elemen div dengan kelas 'row'
+                        let rowDiv = doc.createElement("div");
+                        rowDiv.className = "row";
+                        rowDiv.style.textAlign = "center";
+                        // rowDiv.style.border = "1px solid black";
+
+                        // Kolom pertama (col-1) untuk gambar logo
+                        let logoCol = doc.createElement("div");
+                        logoCol.className = "col-sm-2";
+                        // logoCol.style.border = "1px solid black";
+
+                        // Menambahkan logo
+                        let img = new Image();
+                        img.src = '/adminlte/dist/img/sippreslogo.png';
+                        img.width = 100; // Atur lebar gambar menjadi 200 piksel
+                        img.height = 100; // Atur tinggi gambar menjadi 100 piksel
+                        logoCol.appendChild(img);
+
+
+                        // Kolom kedua (col-2) untuk nama perusahaan
+                        let companyNameCol = doc.createElement("div");
+                        companyNameCol.className = "col";
+
+                        // Menambahkan nama perusahaan
+                        let companyName = doc.createElement("h1");
+                        companyName.textContent = "SMAN BANDAR KEDUNG MULYO";
+                        companyNameCol.appendChild(companyName);
+
+                        let dataPrestasiText = doc.createElement("h2");
+                        dataPrestasiText.textContent = "Daftar prestasi siswa sman Bandar Kedung mulyo";
+                        companyNameCol.appendChild(dataPrestasiText);
+
+
+                        // Menambahkan kolom ke dalam baris
+                        rowDiv.appendChild(logoCol);
+                        rowDiv.appendChild(companyNameCol);
+                        // // Menambahkan elemen hr
+                        // let lineBreak = doc.createElement("hr");
+                        // lineBreak.style.marginBottom = "100px";
+                        // lineBreak.style.border = "1px solid black";
+                        // rowDiv.appendChild(lineBreak);
+
+                        // Menambahkan elemen div 'row' ke dalam body dokumen
+                        doc.body.insertBefore(rowDiv, doc.body.firstChild);
+
+
+                    },
+                    // repeatingHead: {
+                    //     logo: 'https://www.google.co.in/logos/doodles/2018/world-cup-2018-day-22-5384495837478912-s.png',
+                    //     logoPosition: 'right',
+                    //     logoStyle: '',
+                    //     title: '<h3>Sample Heading</h3>'
+                    // },
+                    exportOptions: {
+                        columns: [0, 1, 3, 4, 5], // Kolom id, name, email,role
+                        customizeData: function(data) {
+                            // console.log(data.header[4]);
+                            let filteredData = data.body.filter(function(row) {
+                                // console.log(row[4] == "Diterima");
+                                return row[4] == "Diterima";
+                                // console.log(row.data[statusColumnIndex] == "Diterima");
+                            });
+                            // console.log(filteredData);
+                            // Mengganti body data dengan data yang telah difilter
+                            data.body = filteredData;
+
+                            return data;
+                        }, // Kolom id, name, email,role
+                    }
+                },
+                //"colvis",
                 {
                     text: 'tambah ',
                     action: function(e, dt, node, config) {

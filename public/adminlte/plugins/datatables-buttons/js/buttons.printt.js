@@ -120,24 +120,9 @@ DataTable.ext.buttons.print = {
 		// Construct a table for printing
 		var html = '<table class="'+dt.table().node().className+'">';
 
-		html += '<thead>';
-		
-		// Adding logo to the page (repeats for every page while print)
-		if(config.repeatingHead.logo) {
-			var logoPosition = (['left','right','center'].indexOf(config.repeatingHead.logoPosition) > 0) ? config.repeatingHead.logoPosition : 'right';
-			html += '<tr><th colspan="'+data.header.length+'" style="padding: 0;margin: 0;text-align: '+logoPosition+';"><img style="'+config.repeatingHead.logoStyle+'" src="'+config.repeatingHead.logo+'"/></th></tr>';
-		}
-		
-		// Adding title (repeats for every page while print)
-		if(config.repeatingHead.title) {
-			html += '<tr><th colspan="'+data.header.length+'">'+config.repeatingHead.title+'</th></tr>';
-		}
-		
 		if ( config.header ) {
-			html += addRow( data.header, 'th' );
+			html += '<thead>'+ addRow( data.header, 'th' ) +'</thead>';
 		}
-		
-		html += '</thead>';
 
 		html += '<tbody>';
 		for ( var i=0, ien=data.body.length ; i<ien ; i++ ) {
@@ -152,6 +137,17 @@ DataTable.ext.buttons.print = {
 
 		// Open a new window for the printable table
 		var win = window.open( '', '' );
+
+		if (! win) {
+			dt.buttons.info(
+				dt.i18n( 'buttons.printErrorTitle', 'Unable to open print view' ),
+				dt.i18n( 'buttons.printErrorMsg', 'Please allow popups in your browser for this site to be able to view the print view.' ),
+				5000
+			);
+
+			return;
+		}
+
 		win.document.close();
 
 		// Inject the title and also a copy of the style and link tags from this
@@ -208,8 +204,6 @@ DataTable.ext.buttons.print = {
 	messageTop: '*',
 
 	messageBottom: '*',
-	
-	repeatingHead: {},
 
 	exportOptions: {},
 
