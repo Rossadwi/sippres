@@ -340,6 +340,61 @@
 
                 {
                     extend: "pdf",
+                    title: '',
+                    // customize: function(win) {
+                    //     // Menghapus elemen h1 (judul) dari dokumen
+                    //     // $(win.document.body).find('h1').remove();
+
+                    //     // Mengakses dokumen yang akan dicetak
+                    //     let doc = win.document;
+
+                    //     // Membuat elemen div dengan kelas 'row'
+                    //     let rowDiv = doc.createElement("div");
+                    //     rowDiv.className = "row";
+                    //     rowDiv.style.textAlign = "center";
+                    //     // rowDiv.style.border = "1px solid black";
+
+                    //     // Kolom pertama (col-1) untuk gambar logo
+                    //     let logoCol = doc.createElement("div");
+                    //     logoCol.className = "col-sm-2";
+                    //     // logoCol.style.border = "1px solid black";
+
+                    //     // Menambahkan logo
+                    //     let img = new Image();
+                    //     img.src = '/adminlte/dist/img/sippreslogo.png';
+                    //     img.width = 100; // Atur lebar gambar menjadi 200 piksel
+                    //     img.height = 100; // Atur tinggi gambar menjadi 100 piksel
+                    //     logoCol.appendChild(img);
+
+
+                    //     // Kolom kedua (col-2) untuk nama perusahaan
+                    //     let companyNameCol = doc.createElement("div");
+                    //     companyNameCol.className = "col";
+
+                    //     // Menambahkan nama perusahaan
+                    //     let companyName = doc.createElement("h1");
+                    //     companyName.textContent = "SMAN BANDAR KEDUNG MULYO";
+                    //     companyNameCol.appendChild(companyName);
+
+                    //     let dataPrestasiText = doc.createElement("h2");
+                    //     dataPrestasiText.textContent = "Daftar prestasi siswa sman Bandar Kedung mulyo";
+                    //     companyNameCol.appendChild(dataPrestasiText);
+
+
+                    //     // Menambahkan kolom ke dalam baris
+                    //     rowDiv.appendChild(logoCol);
+                    //     rowDiv.appendChild(companyNameCol);
+                    //     // // Menambahkan elemen hr
+                    //     // let lineBreak = doc.createElement("hr");
+                    //     // lineBreak.style.marginBottom = "100px";
+                    //     // lineBreak.style.border = "1px solid black";
+                    //     // rowDiv.appendChild(lineBreak);
+
+                    //     // Menambahkan elemen div 'row' ke dalam body dokumen
+                    //     doc.body.insertBefore(rowDiv, doc.body.firstChild);
+
+
+                    // },
                     exportOptions: {
                         columns: [0, 1, 3, 4, 5], // Kolom id, name, email,role
                         customizeData: function(data) {
@@ -356,17 +411,6 @@
 
                             return data;
                         },
-                        customize: function(doc) {
-                            // console.log(doc);
-                            // // Mengatur lebar kolom
-                            doc.autoTable.setColumnWidth(0, 150); // Kolom 0 (ID) memiliki lebar 50
-                            doc.autoTable.setColumnWidth(1, 100); // Kolom 1 (Nama) memiliki lebar 100
-                            doc.autoTable.setColumnWidth(2, 50); // Kolom 2 (Email) memiliki lebar 150
-                            doc.autoTable.setColumnWidth(3, 80); // Kolom 3 (Peran) memiliki lebar 80
-                            doc.autoTable.setColumnWidth(4, 80); // Kolom 4 (Status) memiliki lebar 80
-
-                            // // Mengatur opsi lainnya jika diperlukan
-                        }
                     }
                 },
 
