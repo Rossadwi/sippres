@@ -449,11 +449,11 @@
 
                         // Menambahkan nama perusahaan
                         let companyName = doc.createElement("h1");
-                        companyName.textContent = "SMAN BANDAR KEDUNG MULYO";
+                        companyName.textContent = "SMA NEGERI BANDARKEDUNGMULYO";
                         companyNameCol.appendChild(companyName);
 
                         let dataPrestasiText = doc.createElement("h2");
-                        dataPrestasiText.textContent = "Daftar prestasi siswa sman Bandar Kedung mulyo";
+                        dataPrestasiText.textContent = "Capaian prestasi siswa SMA Negeri Bandarkedungmulyo";
                         companyNameCol.appendChild(dataPrestasiText);
 
 
