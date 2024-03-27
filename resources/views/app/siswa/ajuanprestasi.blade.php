@@ -428,8 +428,8 @@
                 {
                     extend: "print",
                     title: '',
+                    // Menghapus elemen h1 (judul) dari dokumen
                     customize: function(win) {
-                        // Menghapus elemen h1 (judul) dari dokumen
                         // $(win.document.body).find('h1').remove();
 
                         // Mengakses dokumen yang akan dicetak

@@ -312,6 +312,81 @@
                 //     }
                 // }, "colvis",
                 {
+                    extend: "print",
+                    title: '',
+                    // Menghapus elemen h1 (judul) dari dokumen
+                    customize: function(win) {
+                        // $(win.document.body).find('h1').remove();
+
+                        // Mengakses dokumen yang akan dicetak
+                        let doc = win.document;
+
+                        // Membuat elemen div dengan kelas 'row'
+                        let rowDiv = doc.createElement("div");
+                        rowDiv.className = "row";
+                        rowDiv.style.textAlign = "center";
+                        // rowDiv.style.border = "1px solid black";
+
+                        // Kolom pertama (col-1) untuk gambar logo
+                        let logoCol = doc.createElement("div");
+                        logoCol.className = "col-sm-2";
+                        // logoCol.style.border = "1px solid black";
+
+                        // Menambahkan logo
+                        let img = new Image();
+                        img.src = '/adminlte/dist/img/sippreslogo.png';
+                        img.width = 100; // Atur lebar gambar menjadi 200 piksel
+                        img.height = 100; // Atur tinggi gambar menjadi 100 piksel
+                        logoCol.appendChild(img);
+
+
+                        // Kolom kedua (col-2) untuk nama perusahaan
+                        let companyNameCol = doc.createElement("div");
+                        companyNameCol.className = "col";
+
+                        // Menambahkan nama perusahaan
+                        let companyName = doc.createElement("h1");
+                        companyName.textContent = "SMA NEGERI BANDARKEDUNGMULYO";
+                        companyNameCol.appendChild(companyName);
+
+                        let dataPrestasiText = doc.createElement("h2");
+                        dataPrestasiText.textContent = "Capaian Keaktifan Siswa";
+                        companyNameCol.appendChild(dataPrestasiText);
+
+
+                        // Menambahkan kolom ke dalam baris
+                        rowDiv.appendChild(logoCol);
+                        rowDiv.appendChild(companyNameCol);
+                        // // Menambahkan elemen hr
+                        // let lineBreak = doc.createElement("hr");
+                        // lineBreak.style.marginBottom = "100px";
+                        // lineBreak.style.border = "1px solid black";
+                        // rowDiv.appendChild(lineBreak);
+
+                        // Menambahkan elemen div 'row' ke dalam body dokumen
+                        doc.body.insertBefore(rowDiv, doc.body.firstChild);
+
+
+                    },
+                  
+                    exportOptions: {
+                        columns: [0, 1, 3, 4],
+                        customizeData: function(data) {
+                            // console.log(data.header[4]);
+                            let filteredData = data.body.filter(function(row) {
+                                // console.log(row[4] == "Diterima");
+                                return row[3] == "Diterima";
+                                // console.log(row.data[statusColumnIndex] == "Diterima");
+                            });
+                            // console.log(filteredData);
+                            // Mengganti body data dengan data yang telah difilter
+                            data.body = filteredData;
+
+                            return data;
+                        }, 
+                    }
+                },
+                {
                     text: 'tambah ',
                     action: function(e, dt, node, config) {
                         $('#modalTambah').modal('show');
