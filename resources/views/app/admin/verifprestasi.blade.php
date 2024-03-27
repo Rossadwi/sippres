@@ -444,29 +444,67 @@
                 {
                     extend: "excel",
                     exportOptions: {
-                        columns: [0, 1, 2, 3] // Kolom id, name, email,role
+                        columns: [0, 1, 2, 3, 5, 6]
                     }
 
                 },
-                // {
-                //     extend: "pdf",
-                //     exportOptions: {
-                //         columns: [1, 2, 3, 5, 6] // Kolom id, name, email,role
-                //     }
-                // }, 
+               
                 {
                     extend: "print",
+                    title: '',
+                    customize: function(win) {
+                        // Menghapus elemen h1 (judul) dari dokumen
+                        // $(win.document.body).find('h1').remove();
+
+                        // Mengakses dokumen yang akan dicetak
+                        let doc = win.document;
+
+                        // Membuat elemen div dengan kelas 'row'
+                        let rowDiv = doc.createElement("div");
+                        rowDiv.className = "row";
+                        rowDiv.style.textAlign = "center";
+                        // rowDiv.style.border = "1px solid black";
+
+                        // Kolom pertama (col-1) untuk gambar logo
+                        let logoCol = doc.createElement("div");
+                        logoCol.className = "col-sm-2";
+                        // logoCol.style.border = "1px solid black";
+
+                        // Menambahkan logo
+                        let img = new Image();
+                        img.src = '/adminlte/dist/img/sippreslogo.png';
+                        img.width = 100; // Atur lebar gambar menjadi 200 piksel
+                        img.height = 100; // Atur tinggi gambar menjadi 100 piksel
+                        logoCol.appendChild(img);
+
+
+                        // Kolom kedua (col-2) untuk nama perusahaan
+                        let companyNameCol = doc.createElement("div");
+                        companyNameCol.className = "col";
+
+                        // Menambahkan nama perusahaan
+                        let companyName = doc.createElement("h1");
+                        companyName.textContent = "SMA NEGERI BANDARKEDUNGMULYO";
+                        companyNameCol.appendChild(companyName);
+
+                        let dataPrestasiText = doc.createElement("h2");
+                        dataPrestasiText.textContent = "Daftar Capaian Prestasi Siswa";
+                        companyNameCol.appendChild(dataPrestasiText);
+
+
+                        // Menambahkan kolom ke dalam baris
+                        rowDiv.appendChild(logoCol);
+                        rowDiv.appendChild(companyNameCol);
+                        
+                        // Menambahkan elemen div 'row' ke dalam body dokumen
+                        doc.body.insertBefore(rowDiv, doc.body.firstChild);
+                    },
+                    
                     exportOptions: {
-                        columns: [1, 2, 3, 5, 6] // Kolom id, name, email,role
+                        columns: [0, 1, 2, 3, 5, 6 ], 
+                        }, 
                     }
-                }
-                //, "colvis",
-                // {
-                //     text: 'tambah ',
-                //     action: function(e, dt, node, config) {
-                //         $('#modalTambah').modal('show');
-                //     }
-                // }
+         
             ]
         }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
 

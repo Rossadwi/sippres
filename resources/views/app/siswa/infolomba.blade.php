@@ -65,12 +65,22 @@
                                                 <img src="/poster/{{$row->foto}}" alt="user-avatar" class="img-circle img-fluid">
                                             </div>
                                     </div>
-                                    <p class="text-muted text-sm">
+                                    <style>
+                                        .text-ellipsis {
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            white-space: nowrap;
+                                        }
+                                    </style>
+                                    <p class="text-muted text-sm text-ellipsis">
                                         {{$row->deskripsi}}
                                     </p>
                                     <p class="text-muted text-sm">
                                         <b>Waktu Pendaftaran:</b>{{$row->waktu_daftar}} <br></br>
                                         <b>Waktu Penutupan:</b>{{$row->waktu_tutup}}
+                                    </p>
+                                    <p class="text-muted text-sm">
+                                        <a href="{{$row->panduan}}"target="_blank">Link Panduan</a>
                                     </p>
                                     <!-- <ul class="ml-4 mb-0 fa-ul text-muted">
                                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>

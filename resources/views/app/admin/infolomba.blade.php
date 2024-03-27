@@ -225,7 +225,7 @@
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">Panduan</label>
                                 <div class="col-lg-12">
-                                    <input type="text" name="panduan" placeholder="Masukkan link panduan" class="form-control">
+                                    <input type="text" id="panduan" name="panduan" placeholder="Masukkan link panduan" class="form-control">
                                 </div>
                             </div>
                         </div>
